@@ -29,6 +29,7 @@ export function ChatSidebar({ currentRoomId, onRoomSelect, accessToken }: ChatSi
 
   useEffect(() => {
     fetchRooms();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken]);
 
   const fetchRooms = async () => {

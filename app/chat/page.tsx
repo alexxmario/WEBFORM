@@ -92,7 +92,7 @@ export default function ChatPage() {
         { event: "INSERT", schema: "public", table: "messages", filter: `room_id=eq.${roomId}` },
         async (payload) => {
           console.log("New message received via realtime:", payload);
-          const record = payload.new as any;
+          const record = payload.new as Record<string, unknown>;
 
           // Fetch sender email from profiles
           const { data: senderProfile } = await supabase
@@ -121,7 +121,7 @@ export default function ChatPage() {
       console.log("Unsubscribing from room:", roomId);
       channel.unsubscribe();
     };
-  }, [roomId, supabase]);
+  }, [roomId, supabase, loadMessages]);
 
   const initRoom = async (userId: string, userEmail: string) => {
     try {
@@ -162,7 +162,7 @@ export default function ChatPage() {
 
       if (data) {
         console.log("Loaded messages:", data.length);
-        const mapped: Message[] = data.map((m: any) => ({
+        const mapped: Message[] = data.map((m: Record<string, unknown>) => ({
           id: m.id,
           content: m.content,
           created_at: m.created_at,

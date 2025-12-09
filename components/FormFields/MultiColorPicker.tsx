@@ -10,8 +10,6 @@ type Props = {
 };
 
 export function MultiColorPicker({ value, onChange }: Props) {
-  const id = useId();
-
   // Ensure value is always an array (handle backward compatibility)
   const colors = Array.isArray(value) ? value : (value ? [value as string] : []);
 

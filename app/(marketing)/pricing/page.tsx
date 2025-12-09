@@ -1,11 +1,8 @@
-import Link from "next/link";
-
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Plans } from "@/components/Plans";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { BlueprintButton } from "@/components/BlueprintButton";
 
 export default function PricingPage() {

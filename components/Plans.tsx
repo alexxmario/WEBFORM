@@ -1,11 +1,9 @@
 "use client";
 
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { cn } from "@/lib/utils";
 import { BlueprintButton } from "./BlueprintButton";

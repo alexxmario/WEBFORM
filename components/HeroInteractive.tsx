@@ -9,7 +9,6 @@ import { loadFromStorage, saveToStorage } from "@/lib/utils";
 import { useAuth } from "@/lib/hooks/useAuth";
 import { FloatingLines } from "./FloatingLines";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 
 const storageKey = "webform-hero-answer";
 
@@ -17,7 +16,7 @@ export function HeroInteractive() {
   const router = useRouter();
   const { isAuthenticated, loading } = useAuth();
   const prefersReducedMotion = useReducedMotion();
-  const [answer, setAnswer] = useState(() =>
+  const [answer] = useState(() =>
     loadFromStorage(storageKey, heroPlaceholders[0]),
   );
 

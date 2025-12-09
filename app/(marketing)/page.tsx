@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import Script from "next/script";
-import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 import { Header } from "@/components/Header";
 import { HeroInteractive } from "@/components/HeroInteractive";
-import { VideoModal } from "@/components/VideoModal";
 import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/Footer";
 import { BlueprintButton } from "@/components/BlueprintButton";
@@ -34,7 +32,7 @@ export default function HomePage() {
       toast.success("You'll be notified when e-commerce is available!");
       setEmail("");
       setNotifyDialogOpen(false);
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -257,6 +255,7 @@ export default function HomePage() {
                           key={template.name}
                           className="aspect-video rounded-lg border border-white/10 bg-white/5 overflow-hidden"
                         >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={template.img}
                             alt={template.name}
@@ -530,7 +529,7 @@ export default function HomePage() {
           <DialogHeader>
             <DialogTitle className="text-2xl font-semibold">Get Notified</DialogTitle>
             <DialogDescription>
-              Enter your email and we'll notify you as soon as<br />e-commerce functionality is available.
+              Enter your email and we&apos;ll notify you as soon as<br />e-commerce functionality is available.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleNotifySubmit} className="space-y-4">
