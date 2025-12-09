@@ -92,7 +92,13 @@ export default function ChatPage() {
         { event: "INSERT", schema: "public", table: "messages", filter: `room_id=eq.${roomId}` },
         async (payload) => {
           console.log("New message received via realtime:", payload);
-          const record = payload.new as Record<string, unknown>;
+          const record = payload.new as {
+            id: string;
+            content: string;
+            created_at: string;
+            sender_id: string;
+            room_id: string;
+          };
 
           // Fetch sender email from profiles
           const { data: senderProfile } = await supabase
@@ -163,7 +169,13 @@ export default function ChatPage() {
 
       if (data) {
         console.log("Loaded messages:", data.length);
-        const mapped: Message[] = data.map((m: Record<string, unknown>) => ({
+        const mapped: Message[] = data.map((m: {
+          id: string;
+          content: string;
+          created_at: string;
+          sender_id: string;
+          profiles?: { email: string };
+        }) => ({
           id: m.id,
           content: m.content,
           created_at: m.created_at,
