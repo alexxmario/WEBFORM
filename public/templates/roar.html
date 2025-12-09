@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-[#030303]"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roar - AI Social Growth</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<!-- Animation Keyframe Styles -->
+<style class="">
+/*
+Sequence animation intro.
+*/
+@keyframes animationIn {
+0% {
+opacity: 0;
+transform: translateY(30px);
+filter: blur(8px);
+}
+100% {
+opacity: 1;
+transform: translateY(0);
+filter: blur(0px);
+}
+}
+</style>
+<!-- Animation on Scroll Script -->
+<script>
+/*
+Sequence animation on scroll when visible.
+*/
+(function () {
+// Inject CSS for paused/running states
+const style = document.createElement("style");
+style.textContent = `
+/* Default: paused */
+.animate-on-scroll { animation-play-state: paused !important; }
+/* Activated by JS */
+.animate-on-scroll.animate { animation-play-state: running !important; }
+`;
+document.head.appendChild(style);
+const once = true;
+if (!window.__inViewIO) {
+window.__inViewIO = new IntersectionObserver((entries) => {
+entries.forEach((entry) => {
+if (entry.isIntersecting) {
+entry.target.classList.add("animate");
+if (once) window.__inViewIO.unobserve(entry.target);
+}
+});
+}, { threshold: 0.2, rootMargin: "0px 0px -10% 0px" });
+}
+window.initInViewAnimations = function (selector = ".animate-on-scroll") {
+document.querySelectorAll(selector).forEach((el) => {
+window.__inViewIO.observe(el); // observing twice is a no-op
+});
+};
+document.addEventListener("DOMContentLoaded", () => initInViewAnimations());
+})();
+</script>
+<style>
+body {
+font-feature-settings: "cv11", "ss01";
+background-color: #030303;
+}
+/* Grid Background - Container Aligned */
+.grid-overlay {
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: 0;
+display: flex;
+justify-content: center;
+}
+.grid-inner {
+width: 100%;
+height: 100%;
+max-width: 80rem; /* max-w-7xl equivalent */
+display: flex;
+justify-content: space-between;
+padding: 0 1rem; /* match px-4 */
+}
+.grid-line-v {
+width: 1px;
+height: 100%;
+background: rgba(255,255,255,0.02);
+}
+/* Utilities */
+.text-gradient {
+background-clip: text;
+-webkit-background-clip: text;
+color: transparent;
+background-image: linear-gradient(to bottom, #fff, #777);
+}
+.border-subtle { border-color: rgba(255, 255, 255, 0.03); }
+/* Border Beam Animation */
+@keyframes border-beam {
+0% { offset-distance: 0%; }
+100% { offset-distance: 100%; }
+}
+.beam-border {
+position: absolute;
+inset: 0;
+border-radius: 9999px;
+pointer-events: none;
+overflow: hidden;
+}
+.beam-border::before {
+content: "";
+position: absolute;
+inset: -2px; /* controls thickness of beam relative to border */
+background: conic-gradient(from 0deg, transparent 0 340deg, white 360deg);
+animation: spin 4s linear infinite;
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+.group:hover .beam-border::before {
+opacity: 1;
+}
+@keyframes spin {
+from { transform: rotate(0deg); }
+to { transform: rotate(360deg); }
+}
+/* Text Reveal Scroller */
+.reveal-word {
+opacity: 0.1;
+transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-word.active {
+opacity: 1;
+}
+/* Marquee Animation */
+.marquee-container {
+mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+-webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.marquee-content {
+animation: marquee 40s linear infinite;
+}
+@keyframes marquee {
+0% { transform: translateX(0); }
+100% { transform: translateX(-50%); }
+}
+/* Sticky Workflow Step Active State */
+.step-indicator { transition: all 0.5s ease; width: 2px; height: 100%; background: #262626; }
+.step-indicator.active { background: #fff; }
+.step-text { transition: all 0.5s ease; color: #555; }
+.step-text.active { color: #fff; }
+/* Solar Icon Fixes */
+iconify-icon { display: inline-block; vertical-align: middle; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+// 1. General Observer (Using user provided script mostly, this remains for counters only)
+const observer = new IntersectionObserver((entries) => {
+entries.forEach((entry) => {
+if (entry.isIntersecting) {
+if (entry.target.classList.contains('counter-trigger')) startCounters(entry.target);
+observer.unobserve(entry.target);
+}
+});
+}, { threshold: 0.1 });
+document.querySelectorAll(".counter-trigger").forEach((el) => observer.observe(el));
+// 2. Counters
+function startCounters(container) {
+container.querySelectorAll('[data-target]').forEach(counter => {
+const target = parseFloat(counter.getAttribute('data-target'));
+const suffix = counter.getAttribute('data-suffix') || '';
+const prefix = counter.getAttribute('data-prefix') || '';
+let start = 0;
+const duration = 1500;
+const startTime = performance.now();
+function update(t) {
+const p = Math.min((t - startTime) / duration, 1);
+const ease = 1 - Math.pow(1 - p, 4);
+counter.innerText = prefix + (target * ease).toFixed(target % 1 === 0 ? 0 : 1) + suffix;
+if (p < 1) requestAnimationFrame(update);
+}
+requestAnimationFrame(update);
+});
+}
+// 3. Text Reveal
+const textSection = document.getElementById('scroll-reveal-section');
+const words = document.querySelectorAll('.reveal-word');
+if (textSection) {
+window.addEventListener('scroll', () => {
+const rect = textSection.getBoundingClientRect();
+const winH = window.innerHeight;
+const startReveal = winH * 0.9;
+const endReveal = winH * 0.4;
+let progress = (startReveal - rect.top) / (startReveal - endReveal);
+progress = Math.max(0, Math.min(1, progress));
+const activeCount = Math.floor(progress * words.length);
+words.forEach((w, i) => i < activeCount ? w.classList.add('active') : w.classList.remove('active'));
+});
+}
+// 4. Workflow Steps Observer
+const workflowSteps = document.querySelectorAll('.workflow-step-content');
+const stepIndicators = document.querySelectorAll('.step-trigger');
+const workflowImages = document.querySelectorAll('.workflow-img');
+const stepObserver = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+const index = entry.target.getAttribute('data-step');
+stepIndicators.forEach(ind => {
+const line = ind.querySelector('.step-indicator');
+const text = ind.querySelector('.step-text');
+if(ind.getAttribute('data-step') === index) {
+line.classList.add('active');
+text.classList.add('active');
+} else {
+line.classList.remove('active');
+text.classList.remove('active');
+}
+});
+workflowImages.forEach(img => {
+if(img.getAttribute('data-step') === index) {
+img.classList.remove('opacity-0', 'scale-95');
+img.classList.add('opacity-100', 'scale-100');
+} else {
+img.classList.add('opacity-0', 'scale-95');
+img.classList.remove('opacity-100', 'scale-100');
+}
+});
+}
+});
+}, { rootMargin: "-40% 0px -40% 0px" });
+workflowSteps.forEach(step => stepObserver.observe(step));
+});
+</script>
+<style>
+.font-geist-mono { font-family: 'Geist Mono', monospace !important; }
+.font-geist { font-family: 'Geist', sans-serif !important; }
+.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }
+</style>
+<link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style></head>
+<body class="text-slate-400 antialiased selection:bg-white/10 selection:text-white relative overflow-x-hidden font-geist-mono">
+
+<!-- Background (component) added by Aura -->
+<div class="aura-background-component fixed top-0 w-full h-screen" data-alpha-mask="80" style="; mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent)"><div class="aura-background-component top-0 w-full -z-10 absolute h-full">
+  <div data-us-project="ZHhDKfVqqu8PKOSMwfuA" class="absolute w-full h-full left-0 top-0 -z-10"></div>
+  <script type="text/javascript">
+    !function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head || document.body).appendChild(i)}}();
+  </script>
+</div></div>
+
+    <!-- Container-Size Grid Background -->
+    <div class="grid-overlay">
+        <div class="grid-inner">
+            <div class="grid-line-v"></div>
+            <div class="grid-line-v hidden md:block"></div>
+            <div class="grid-line-v hidden lg:block"></div>
+            <div class="grid-line-v"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 [animation:animationIn_0.8s_ease-out_0.1s_both] animate-on-scroll">
+        <div class="border-subtle flex bg-black/90 w-full max-w-4xl border pt-2 pr-2 pb-2 pl-2 shadow-2xl backdrop-blur-xl gap-x-1 gap-y-1 items-center justify-between">
+            <a href="#" class="bg-white/5 hover:bg-white/10 px-5 py-2 text-xs tracking-widest uppercase transition-all text-neutral-300 font-geist">Roar.ai</a>
+            
+            <div class="hidden md:flex items-center gap-1">
+                <a href="#strategy" class="hover:text-white px-4 py-2 text-xs tracking-widest uppercase transition-colors text-neutral-500 font-geist">Strategy</a>
+                <a href="#workflows" class="hover:text-white px-4 py-2 text-xs tracking-widest uppercase transition-colors text-neutral-500 font-geist">Workflows</a>
+            </div>
+
+            <div class="px-6 text-2xl text-white uppercase flex items-center gap-2 tracking-tighter font-space-grotesk font-light">
+                <div class="w-1.5 h-1.5 bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
+                ROAR
+            </div>
+
+            <div class="hidden md:flex items-center gap-1">
+                <a href="#results" class="hover:text-white px-4 py-2 text-xs tracking-widest uppercase transition-colors text-neutral-500 font-geist">Results</a>
+                <a href="#contact" class="hover:text-white px-4 py-2 text-xs tracking-widest uppercase transition-colors text-neutral-500 font-geist">Contact</a>
+            </div>
+
+            <a href="#contact" class="group relative bg-white text-black px-6 py-2 text-xs font-semibold tracking-widest uppercase transition-transform overflow-hidden">
+                <span class="relative z-10 font-geist">Book Call</span>
+                <div class="absolute inset-0 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left bg-neutral-200"></div>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-40 pb-20 md:pt-52 md:pb-32 overflow-hidden z-10">
+        <div class="container mx-auto px-4 relative max-w-7xl">
+            <div class="flex flex-col text-center mb-24 relative space-y-0 items-center justify-center">
+                <!-- Version Tag -->
+                <div class="absolute -left-4 md:left-20 top-0 flex flex-col gap-2 opacity-30 hidden lg:flex [animation:animationIn_0.8s_ease-out_0.5s_both] animate-on-scroll">
+                    <span class="text-[10px] uppercase tracking-widest text-neutral-500 font-geist">Ver. 2.4</span>
+                    <div class="w-px h-12 bg-gradient-to-b to-transparent from-neutral-500"></div>
+                </div>
+
+                <div class="flex flex-col z-10 w-full items-center justify-center">
+                    <h1 class="uppercase leading-[0.85] flex flex-wrap justify-center gap-x-4 md:text-9xl md:gap-x-8 text-6xl font-semibold text-white tracking-tighter mt-8 mb-0">
+                         <span class="[animation:animationIn_0.8s_ease-out_0.2s_both] animate-on-scroll tracking-tighter font-space-grotesk font-light">Algorithm</span>
+                         <span class="text-gradient [animation:animationIn_0.8s_ease-out_0.3s_both] animate-on-scroll font-light tracking-tighter font-space-grotesk">Dominance</span>
+                    </h1>
+                </div>
+
+                <div class="flex flex-col md:flex-row md:mt-12 md:mb-12 z-10 w-full mt-10 mb-8 gap-x-6 gap-y-6 items-center justify-center">
+                    <!-- Status Button with Border Beam -->
+                    <div class="[animation:animationIn_0.8s_ease-out_0.5s_both] animate-on-scroll group my-8 relative">
+                        <div class="beam-border"></div>
+                        <div class="border-subtle flex group-hover:bg-[#0a0a0a] transition-colors md:h-16 bg-[#080808] h-12 z-10 border rounded-full mt-[1px] mr-[1px] mb-[1px] ml-[1px] pr-6 pl-3 relative gap-x-4 gap-y-4 items-center">
+                             <div class="md:w-10 md:h-10 overflow-hidden flex border-subtle text-white bg-neutral-900 w-8 h-8 bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3f6038cb-af1c-4483-97bc-dd58d89c36ef_320w.jpg)] bg-cover bg-center border rounded-full relative items-center justify-center">
+                                <iconify-icon icon="solar:bot-line-duotone" class="text-lg text-white"></iconify-icon>
+                             </div>
+                             <div class="flex flex-col text-left">
+                                 <span class="text-[10px] uppercase tracking-widest text-neutral-500 font-geist">AI_Status</span>
+                                 <span class="text-xs md:text-sm leading-none text-white font-geist">Optimizing</span>
+                             </div>
+                        </div>
+                    </div>
+
+                    <h2 class="[animation:animationIn_0.8s_ease-out_0.4s_both] animate-on-scroll text-lg text-neutral-400 tracking-tight font-space-grotesk md:text-3xl">
+                        Automated Business Growth Strategies
+                    </h2>
+                </div>
+
+                <div class="leading-relaxed [animation:animationIn_0.8s_ease-out_0.6s_both] animate-on-scroll md:text-2xl text-xs text-neutral-500 font-space-grotesk text-center max-w-lg">We leverage predictive AI to grow your social presence, automate engagement, and turn attention into revenue.</div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 max-w-6xl mx-auto counter-trigger [animation:animationIn_0.8s_ease-out_0.2s_both] animate-on-scroll">
+                <!-- Card 1 -->
+                <div class="bg-[#050505] border border-subtle p-8 flex flex-col justify-between min-h-[220px] relative group hover:border-white/10 transition-colors">
+                    <div class="absolute top-4 right-4 text-xs text-white/20 font-geist">01</div>
+                    <div class="flex justify-between items-start">
+                        <iconify-icon icon="solar:chart-2-bold-duotone" class="text-2xl text-neutral-300"></iconify-icon>
+                        <div class="px-2 py-0.5 border border-green-900/30 bg-green-900/10 text-green-400 text-[10px] uppercase tracking-wider font-geist">Live</div>
+                    </div>
+                    <div class="">
+                        <div class="text-4xl text-white mb-1 tracking-tighter font-space-grotesk font-light">
+                            <span data-target="400" data-prefix="+" data-suffix="%">+400%</span>
+                        </div>
+                        <h3 class="text-xs uppercase tracking-widest text-neutral-500 font-geist">Reach Lift</h3>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-[#050505] border border-subtle p-8 flex flex-col justify-between min-h-[220px] relative group hover:border-white/10 transition-colors">
+                    <div class="absolute top-4 right-4 text-xs text-white/20 font-geist">02</div>
+                    <div class="flex justify-between items-start">
+                        <iconify-icon icon="solar:users-group-two-rounded-bold-duotone" class="text-2xl text-neutral-300"></iconify-icon>
+                    </div>
+                    <div class="">
+                        <div class="text-4xl text-white mb-1 tracking-tighter font-space-grotesk font-light">
+                            <span data-target="12.5" data-suffix="k" class="">12.5k</span>
+                        </div>
+                        <h3 class="text-xs uppercase tracking-widest text-neutral-500 font-geist">Leads Generated</h3>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-[#050505] border border-subtle p-8 flex flex-col justify-between min-h-[220px] relative group hover:border-white/10 transition-colors">
+                    <div class="absolute top-4 right-4 text-xs text-white/20 font-geist">03</div>
+                    <div class="flex justify-between items-start">
+                        <iconify-icon icon="solar:bolt-bold-duotone" class="text-2xl text-neutral-300"></iconify-icon>
+                    </div>
+                    <div class="">
+                        <div class="text-4xl text-white mb-1 tracking-tighter font-space-grotesk font-light">
+                            <span data-target="10" data-suffix="x">10x</span>
+                        </div>
+                        <h3 class="text-xs uppercase tracking-widest text-neutral-500 font-geist">Execution Speed</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll Text Section -->
+    <section id="scroll-reveal-section" class="border-y border-subtle bg-black py-32 relative overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-6xl mx-auto text-center leading-tight">
+                <h2 class="text-3xl md:text-5xl tracking-tight uppercase leading-[1.3] font-semibold text-white">
+                    <span class="reveal-word font-space-grotesk font-light">Stop</span> <span class="reveal-word font-space-grotesk font-light">guessing.</span> <span class="reveal-word font-space-grotesk font-light">Start</span>
+                    <span class="reveal-word inline-flex align-middle bg-white/5 border border-subtle px-4 py-1 mx-1 text-white font-space-grotesk font-light">
+                        <iconify-icon icon="solar:cpu-bold-duotone" class="text-2xl mr-2 text-neutral-300"></iconify-icon> Scaling
+                    </span>
+                    <span class="reveal-word font-space-grotesk font-light">with</span> <span class="reveal-word font-space-grotesk font-light">our</span>
+                    <span class="reveal-word text-black bg-white px-4 py-1 mx-1 font-space-grotesk font-light">Neural Engine</span>
+                    <span class="reveal-word font-space-grotesk font-light">that</span> <span class="reveal-word font-space-grotesk font-light">turns</span> <span class="reveal-word font-space-grotesk font-light">content</span> <span class="reveal-word font-space-grotesk font-light">into</span>
+                    <span class="reveal-word inline-flex align-middle border border-subtle text-white px-4 py-1 mx-1">
+                        <iconify-icon icon="solar:dollar-minimalistic-bold-duotone" class="text-2xl"></iconify-icon>
+                    </span>
+                    <span class="reveal-word font-space-grotesk font-light">predictable</span> <span class="reveal-word font-space-grotesk font-light">revenue.</span>
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflows Section -->
+    <section id="workflows" class="relative z-10 border-b border-subtle bg-black">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="flex flex-col lg:flex-row">
+                
+                <!-- Sticky Left Side -->
+                <div class="lg:w-1/2 lg:h-screen sticky top-0 flex flex-col justify-center py-20 lg:py-0 pr-0 lg:pr-20 border-r border-subtle/0 lg:border-subtle">
+                    <h2 class="text-5xl md:text-6xl uppercase mb-8 text-white tracking-tighter font-space-grotesk font-light">
+                        Growth<br><span class="text-neutral-600">Protocol</span>
+                    </h2>
+                    
+                    <!-- Steps Navigation -->
+                    <div class="space-y-6 relative mb-12">
+                        <!-- Step 1 Trigger -->
+                        <div class="step-trigger group cursor-pointer flex items-center gap-6" data-step="1">
+                            <div class="h-12 w-[2px] bg-neutral-800 relative overflow-hidden">
+                                <div class="step-indicator absolute top-0 left-0 w-full h-full bg-white"></div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl uppercase tracking-widest text-white font-space-grotesk">01 / Trend Prediction</h3>
+                                <p class="step-text text-sm text-neutral-500 font-geist">AI analyzes 50M+ data points daily.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 Trigger -->
+                        <div class="step-trigger group cursor-pointer flex items-center gap-6" data-step="2">
+                            <div class="h-12 w-[2px] bg-neutral-800 relative overflow-hidden">
+                                <div class="step-indicator absolute top-0 left-0 w-full h-full bg-white"></div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl uppercase tracking-widest text-white font-space-grotesk">02 / Content Generation</h3>
+                                <p class="step-text text-sm text-neutral-500 font-geist">Auto-created viral hooks and scripts.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 Trigger -->
+                        <div class="step-trigger group cursor-pointer flex items-center gap-6" data-step="3">
+                            <div class="h-12 w-[2px] bg-neutral-800 relative overflow-hidden">
+                                <div class="step-indicator absolute top-0 left-0 w-full h-full bg-white"></div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl uppercase tracking-widest text-white font-space-grotesk">03 / Lead Conversion</h3>
+                                <p class="step-text text-sm text-neutral-500 font-geist">Engagement turns into booked calls.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Visual Display (Sticky) -->
+                    <div class="w-full aspect-video bg-neutral-900 border border-subtle relative overflow-hidden rounded-sm">
+                        <!-- Img 1 -->
+                        <div class="workflow-img absolute inset-0 transition-all duration-700 ease-out flex items-center justify-center bg-black" data-step="1">
+                            <div class="absolute inset-0 bg-cover bg-center opacity-30 bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/11443b2f-dfa8-4425-8445-0f952362cd0a_1600w.webp)]"></div>
+                            <div class="relative z-10 text-center">
+                                <iconify-icon icon="solar:graph-new-bold-duotone" class="text-4xl text-white mb-2"></iconify-icon>
+                                <div class="text-xs font-mono text-green-400">ANALYZING VELOCITY...</div>
+                            </div>
+                        </div>
+                        <!-- Img 2 -->
+                        <div class="workflow-img absolute inset-0 transition-all duration-700 ease-out flex items-center justify-center bg-black" data-step="2">
+                            <div class="absolute inset-0 bg-cover bg-center opacity-30 bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/1ed85ea2-299f-4bb8-845a-a01c814cadc5_1600w.webp)]"></div>
+                            <div class="relative z-10 text-center">
+                                <iconify-icon icon="solar:pen-new-square-bold-duotone" class="text-4xl text-white mb-2"></iconify-icon>
+                                <div class="text-xs font-mono text-blue-400">GENERATING ASSETS...</div>
+                            </div>
+                        </div>
+                        <!-- Img 3 -->
+                        <div class="workflow-img absolute inset-0 transition-all duration-700 ease-out flex items-center justify-center bg-black" data-step="3">
+                            <div class="absolute inset-0 bg-cover bg-center opacity-30 bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a5122f84-43cb-4170-94c3-aded75f0d3ed_1600w.webp)]"></div>
+                            <div class="relative z-10 text-center">
+                                <iconify-icon icon="solar:check-circle-bold-duotone" class="text-4xl text-white mb-2"></iconify-icon>
+                                <div class="text-xs font-mono text-purple-400">CONVERSION COMPLETE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scrolling Right Side (Content Blocks) -->
+                <div class="lg:w-1/2">
+                    <!-- Spacer for start -->
+                    <div class="h-[20vh] hidden lg:block"></div>
+
+                    <!-- Step 1 Content -->
+                    <div class="workflow-step-content min-h-[80vh] flex flex-col justify-center px-0 lg:px-20 py-20 border-b border-subtle" data-step="1">
+                        <span class="text-6xl text-white/10 font-bold mb-6 font-space-grotesk">01</span>
+                        <h3 class="text-3xl text-white mb-6 font-space-grotesk tracking-tight">Predictive Trend Analysis</h3>
+                        <p class="text-neutral-400 leading-relaxed mb-8 font-geist">
+                            Our neural networks scan social graphs in real-time, identifying micro-trends before they peak. This allows you to create content that rides the wave rather than chasing it.
+                        </p>
+                        <ul class="space-y-4 font-geist text-sm text-neutral-300">
+                            <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold-duotone" class="text-green-500"></iconify-icon> Sentiment Analysis</li>
+                            <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold-duotone" class="text-green-500"></iconify-icon> Competitor Mapping</li>
+                            <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold-duotone" class="text-green-500"></iconify-icon> Viral Coefficient Scoring</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 2 Content -->
+                    <div class="workflow-step-content min-h-[80vh] flex flex-col justify-center px-0 lg:px-20 py-20 border-b border-subtle" data-step="2">
+                        <span class="text-6xl text-white/10 font-bold mb-6 font-space-grotesk">02</span>
+                        <h3 class="text-3xl text-white mb-6 font-space-grotesk tracking-tight">Generative Production</h3>
+                        <p class="text-neutral-400 leading-relaxed mb-8 font-geist">
+                            From script to edit, our agents handle the heavy lifting. We generate high-retention video assets tailored to specific platform algorithms (TikTok, Reels, LinkedIn).
+                        </p>
+                        <ul class="space-y-4 font-geist text-sm text-neutral-300">
+                            <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold-duotone" class="text-blue-500"></iconify-icon> AI Voice &amp; Avatar</li>
+                            <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold-duotone" class="text-blue-500"></iconify-icon> Auto-Captioning</li>
+                            <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold-duotone" class="text-blue-500"></iconify-icon> A/B Thumbnail Testing</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 3 Content -->
+                    <div class="workflow-step-content min-h-[80vh] flex flex-col justify-center px-0 lg:px-20 py-20" data-step="3">
+                        <span class="text-6xl text-white/10 font-bold mb-6 font-space-grotesk">03</span>
+                        <h3 class="text-3xl text-white mb-6 font-space-grotesk tracking-tight">Revenue Conversion</h3>
+                        <p class="text-neutral-400 leading-relaxed mb-8 font-geist">
+                            Views are vanity; revenue is sanity. Our automated DM agents engage with comments and likes, qualifying leads and booking meetings directly into your calendar.
+                        </p>
+                        <ul class="space-y-4 font-geist text-sm text-neutral-300">
+                            <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold-duotone" class="text-purple-500"></iconify-icon> 24/7 Response Time</li>
+                            <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold-duotone" class="text-purple-500"></iconify-icon> CRM Integration</li>
+                            <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold-duotone" class="text-purple-500"></iconify-icon> Intent Classification</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results / Outputs Section -->
+    <section id="results" class="bg-black text-white pt-24 pb-12 border-t border-subtle relative z-10">
+        <div class="container max-w-7xl mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-12 pb-8 border-b border-subtle">
+        <div class="">
+            <h2 class="text-5xl md:text-7xl uppercase mb-2 text-white tracking-tighter font-space-grotesk font-light">Outputs</h2>
+            <p class="text-xs uppercase tracking-widest text-neutral-500 font-geist">/ Case Studies / Social ROI</p>
+        </div>
+    </div>
+
+    <!-- Mosaic Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 mb-20 items-stretch">
+        
+        <!-- Col 1 (Single Full Height) -->
+        <div class="flex flex-col gap-1 h-full">
+            <div class="bg-white/[0.02] border border-subtle w-full aspect-[9/16] relative group overflow-hidden">
+                <div class="absolute top-4 right-4 z-20 text-[10px] text-white/50 border border-white/5 px-2 py-0.5 font-geist">MOBILE</div>
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/71ae419e-354a-46fa-ba8f-bf256f56ef97_1600w.webp" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity grayscale-0 hover:grayscale duration-500" alt="Mobile">
+                <div class="absolute bottom-6 left-6 z-20">
+                    <h3 class="text-xl uppercase tracking-tight font-space-grotesk text-white">Vertical Scale</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Col 2 (Stacked 3 items, equal height 1/3 each) -->
+        <div class="flex flex-col gap-1 h-full aspect-[9/16] md:aspect-auto">
+            <!-- Item 1 -->
+            <div class="relative flex-1 group overflow-hidden border border-subtle bg-white/[0.02]">
+                <div class="absolute top-4 right-4 z-20 text-[10px] text-white/50 border border-white/5 px-2 py-0.5 font-geist">WEB</div>
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/1cb81e0e-22cd-4d0a-ac80-d2e13d53b2fc_1600w.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity grayscale-0 hover:grayscale duration-500" alt="Web">
+                <div class="absolute bottom-6 left-6 z-20">
+                    <h3 class="text-xl uppercase tracking-tight font-space-grotesk text-white">Global Reach</h3>
+                </div>
+            </div>
+            <!-- Item 2 -->
+            <div class="relative flex-1 group overflow-hidden border border-subtle bg-white/[0.02]">
+                <div class="absolute top-4 right-4 z-20 text-[10px] text-white/50 border border-white/5 px-2 py-0.5 font-geist">AI</div>
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/11443b2f-dfa8-4425-8445-0f952362cd0a_1600w.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity grayscale-0 hover:grayscale duration-500" alt="AI Process">
+                <div class="absolute bottom-6 left-6 z-20">
+                    <h3 class="text-xl uppercase tracking-tight font-space-grotesk text-white">Neural Process</h3>
+                </div>
+            </div>
+            <!-- Item 3 -->
+            <div class="relative flex-1 group overflow-hidden border border-subtle bg-white/[0.02]">
+                <div class="absolute top-4 right-4 z-20 text-[10px] text-white/50 border border-white/5 px-2 py-0.5 font-geist">DATA</div>
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/5045c0e4-a0e6-44f5-9ce2-f0aeec2f9b70_1600w.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity grayscale-0 hover:grayscale duration-500" alt="Data">
+                <div class="absolute bottom-6 left-6 z-20">
+                    <h3 class="text-xl uppercase tracking-tight font-space-grotesk text-white">Dashboard</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Col 3 (Single Full Height) -->
+        <div class="flex flex-col gap-1 h-full">
+             <div class="bg-white/[0.02] border border-subtle w-full aspect-[9/16] relative group overflow-hidden">
+                <div class="absolute top-4 right-4 z-20 text-[10px] text-white/50 border border-white/5 px-2 py-0.5 font-geist">APP</div>
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/33ae44b1-a1a2-4c73-9849-2614de959a79_1600w.webp" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity grayscale-0 hover:grayscale duration-500" alt="App">
+                <div class="absolute bottom-6 left-6 z-20">
+                    <h3 class="text-xl uppercase tracking-tight font-space-grotesk text-white">App Install</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="border-subtle overflow-hidden z-10 border-t pt-24 pb-24 relative">
+        <div class="container mx-auto px-4 max-w-7xl mb-12">
+            <h2 class="text-3xl md:text-5xl uppercase text-center text-white tracking-tighter font-space-grotesk font-light">
+                Founder <span class="text-neutral-600">Feedback</span>
+            </h2>
+        </div>
+
+        <!-- Alpha Mask Marquee -->
+        <div class="marquee-container w-full relative overflow-hidden py-10">
+            <div class="flex w-[200%] marquee-content hover:[animation-play-state:paused]">
+                <!-- Item Set 1 -->
+                <div class="flex w-1/2 justify-around gap-6 px-4">
+                    <!-- Testimonial 1 -->
+                    <div class="w-[400px] border border-subtle p-8 bg-[#050505] shrink-0">
+                        <p class="text-sm leading-relaxed mb-6 text-neutral-300 font-geist">"Roar's AI workflows didn't just automate our posting, they fundamentally changed our acquisition strategy. We scaled to 1M impressions."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <iconify-icon icon="simple-icons:vercel" class="text-2xl text-white"></iconify-icon>
+                            </div>
+                            <div><div class="text-xs text-white uppercase font-bold font-geist">Sarah Jenks</div><div class="text-[10px] text-neutral-500 uppercase font-geist">CMO, Vercel</div></div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="w-[400px] border border-subtle p-8 bg-[#050505] shrink-0">
+                        <p class="text-sm leading-relaxed mb-6 text-neutral-300 font-geist">"The precision in targeting is unlike anything we've seen. We reduced our CPA by 40% while doubling our content output."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <iconify-icon icon="simple-icons:openai" class="text-2xl text-white"></iconify-icon>
+                            </div>
+                            <div><div class="text-xs text-white uppercase font-bold font-geist">David K.</div><div class="text-[10px] text-neutral-500 uppercase font-geist">VP, OpenAI</div></div>
+                        </div>
+                    </div>
+                     <!-- Testimonial 3 -->
+                     <div class="w-[400px] border border-subtle p-8 bg-[#050505] shrink-0">
+                        <p class="text-sm leading-relaxed mb-6 text-neutral-300 font-geist">"Automated DM funnels are bringing us qualified leads while we sleep. The ROI was evident within the first 14 days."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <iconify-icon icon="simple-icons:stripe" class="text-2xl text-white"></iconify-icon>
+                            </div>
+                            <div><div class="text-xs text-white uppercase font-bold font-geist">Elena R.</div><div class="text-[10px] text-neutral-500 uppercase font-geist">CEO, Stripe</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item Set 2 (Duplicate) -->
+                <div class="flex w-1/2 justify-around gap-6 px-4">
+                     <!-- Testimonial 1 -->
+                     <div class="w-[400px] border border-subtle p-8 bg-[#050505] shrink-0">
+                        <p class="text-sm leading-relaxed mb-6 text-neutral-300 font-geist">"Roar's AI workflows didn't just automate our posting, they fundamentally changed our acquisition strategy. We scaled to 1M impressions."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <iconify-icon icon="simple-icons:vercel" class="text-2xl text-white"></iconify-icon>
+                            </div>
+                            <div><div class="text-xs text-white uppercase font-bold font-geist">Sarah Jenks</div><div class="text-[10px] text-neutral-500 uppercase font-geist">CMO, Vercel</div></div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="w-[400px] border border-subtle p-8 bg-[#050505] shrink-0">
+                        <p class="text-sm leading-relaxed mb-6 text-neutral-300 font-geist">"The precision in targeting is unlike anything we've seen. We reduced our CPA by 40% while doubling our content output."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <iconify-icon icon="simple-icons:openai" class="text-2xl text-white"></iconify-icon>
+                            </div>
+                            <div><div class="text-xs text-white uppercase font-bold font-geist">David K.</div><div class="text-[10px] text-neutral-500 uppercase font-geist">VP, OpenAI</div></div>
+                        </div>
+                    </div>
+                     <!-- Testimonial 3 -->
+                     <div class="w-[400px] border border-subtle p-8 bg-[#050505] shrink-0">
+                        <p class="text-sm leading-relaxed mb-6 text-neutral-300 font-geist">"Automated DM funnels are bringing us qualified leads while we sleep. The ROI was evident within the first 14 days."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <iconify-icon icon="simple-icons:stripe" class="text-2xl text-white"></iconify-icon>
+                            </div>
+                            <div><div class="text-xs text-white uppercase font-bold font-geist">Elena R.</div><div class="text-[10px] text-neutral-500 uppercase font-geist">CEO, Stripe</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination Dots -->
+        <div class="flex justify-center gap-3 mt-8">
+            <button class="w-2 h-2 bg-white rounded-full"></button>
+            <button class="w-2 h-2 bg-neutral-800 hover:bg-neutral-600 transition-colors rounded-full"></button>
+            <button class="w-2 h-2 bg-neutral-800 hover:bg-neutral-600 transition-colors rounded-full"></button>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="border-subtle bg-center z-10 border-t pt-32 pb-32 relative">
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+            <h2 class="md:text-8xl uppercase text-5xl font-light text-white tracking-tighter font-space-grotesk mix-blend-plus-lighter mb-8">
+                Ready to <span class="text-neutral-600">Roar?</span>
+            </h2>
+            <p class="text-xl text-neutral-400 font-geist mix-blend-plus-lighter max-w-xl mr-auto mb-10 ml-auto">
+    Join the 1% of brands leveraging autonomous growth infrastructure.
+</p>
+            <div class="">
+                <a href="#contact" class="inline-block bg-white text-black px-10 py-4 text-sm font-bold tracking-widest uppercase hover:bg-neutral-200 transition-colors font-geist">
+                    Audit My Strategy
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="py-24 relative z-10 border-t border-subtle bg-black">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Left: Info -->
+                <div class="">
+                    <h3 class="text-3xl uppercase text-white mb-6 tracking-tighter font-space-grotesk font-light">Initialize Contact</h3>
+                    <p class="text-sm text-neutral-400 mb-8 leading-relaxed font-geist">
+                        Fill out the parameters for your growth inquiry. Our AI agents will categorize your request and a human strategist will deploy a response within 24 hours.
+                    </p>
+                    <div class="space-y-4 font-geist-mono text-sm">
+                        <div class="flex items-center gap-4 text-neutral-300">
+                            <iconify-icon icon="solar:letter-bold-duotone" class="text-lg"></iconify-icon>
+                            <span class="font-geist">hello@roar.growth</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-neutral-300">
+                            <iconify-icon icon="solar:map-point-bold-duotone" class="text-lg"></iconify-icon>
+                            <span class="font-geist">San Francisco, CA // Node 04</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Form -->
+                <div class="">
+                    <form class="space-y-8">
+                        <div class="group relative">
+                            <input type="text" required="" class="outline-none focus:border-white transition-colors peer placeholder-transparent text-white font-geist-mono bg-transparent w-full border-neutral-800 border-b pt-3 pb-3" id="name">
+                            <label for="name" class="absolute left-0 -top-3 text-[10px] text-neutral-500 uppercase tracking-widest transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-600 peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-white font-geist">Name</label>
+                        </div>
+                        <div class="group relative">
+                            <input type="email" id="email" required="" class="w-full bg-transparent border-b border-neutral-800 py-3 text-white outline-none focus:border-white transition-colors font-geist-mono peer placeholder-transparent">
+                            <label for="email" class="absolute left-0 -top-3 text-[10px] text-neutral-500 uppercase tracking-widest transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-600 peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-white font-geist">Email Address</label>
+                        </div>
+                        <div class="group relative">
+                            <textarea id="message" rows="3" class="w-full bg-transparent border-b border-neutral-800 py-3 text-white outline-none focus:border-white transition-colors font-geist-mono peer placeholder-transparent resize-none"></textarea>
+                            <label for="message" class="absolute left-0 -top-3 text-[10px] text-neutral-500 uppercase tracking-widest transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-600 peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-white font-geist">Project Data</label>
+                        </div>
+                        
+                        <button type="submit" class="group flex items-center gap-4 text-white uppercase tracking-widest text-xs font-bold hover:text-neutral-300 transition-colors pt-4">
+                            <span class="font-geist">Transmit</span>
+                            <iconify-icon icon="solar:arrow-right-bold-duotone" class="transform group-hover:translate-x-1 transition-transform"></iconify-icon>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-subtle bg-black pt-12 pb-8 relative z-10">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12">
+                <div class="text-2xl text-white uppercase flex items-center gap-2 tracking-tighter font-space-grotesk font-light">
+                    <div class="w-1.5 h-1.5 bg-neutral-500"></div>
+                    ROAR
+                </div>
+                <div class="flex gap-8 text-xs font-geist-mono text-neutral-500 uppercase tracking-widest">
+                    <a href="#" class="hover:text-white transition-colors font-geist">Privacy Protocol</a>
+                    <a href="#" class="hover:text-white transition-colors font-geist">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition-colors font-geist">System Status</a>
+                </div>
+            </div>
+
+            <div class="border-t border-subtle pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] font-mono uppercase tracking-widest text-neutral-600">
+                <p class="font-geist">© 2024 Roar Growth Systems. // All Rights Reserved</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors flex items-center gap-2 font-geist"><iconify-icon icon="prime:twitter" class="text-sm"></iconify-icon> Twitter</a>
+                    <a href="#" class="hover:text-white transition-colors flex items-center gap-2 font-geist"><iconify-icon icon="prime:linkedin" class="text-sm"></iconify-icon> LinkedIn</a>
+                    <a href="#" class="hover:text-white transition-colors flex items-center gap-2 font-geist"><iconify-icon icon="prime:instagram" class="text-sm"></iconify-icon> Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+</body></html>

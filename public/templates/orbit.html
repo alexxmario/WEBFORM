@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Orbit — Engineering velocity.</title>
+    <meta name="description" content="The issue tracker designed for speed." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body
+    class="antialiased bg-[#030304] text-zinc-300 font-sans selection:bg-indigo-500/30 selection:text-indigo-200"
+    style="font-family: 'Inter', system-ui, sans-serif;"
+  >
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+      <div class="absolute top-[-10%] left-[20%] h-[500px] w-[500px] rounded-full bg-indigo-900/20 blur-[120px] mix-blend-screen"></div>
+      <div class="absolute bottom-[-10%] right-[20%] h-[600px] w-[600px] rounded-full bg-violet-900/10 blur-[120px] mix-blend-screen"></div>
+      <div
+        class="absolute top-[40%] left-1/2 h-[400px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-900/10 blur-[100px] opacity-50"
+      ></div>
+      <div
+        class="absolute inset-0 opacity-[0.03]"
+        style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"
+      ></div>
+    </div>
+
+    <header class="fixed top-0 z-50 w-full border-b border-white/5 bg-[#030304]/80 backdrop-blur-xl">
+      <div class="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
+        <div class="flex items-center gap-8">
+          <a href="#" class="group flex items-center gap-2">
+            <div
+              class="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-to-tr from-white to-zinc-400 text-black shadow-lg shadow-white/10"
+            >
+              <svg viewBox="0 0 24 24" fill="none" class="h-4 w-4">
+                <circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="3"></circle>
+              </svg>
+            </div>
+            <span class="font-semibold tracking-tight text-zinc-100 transition-opacity group-hover:opacity-80">
+              Orbit
+            </span>
+          </a>
+          <nav class="hidden items-center gap-6 text-sm font-medium text-zinc-400 md:flex">
+            <a href="#" class="transition-colors hover:text-zinc-100">Features</a>
+            <a href="#" class="transition-colors hover:text-zinc-100">Method</a>
+            <a href="#" class="transition-colors hover:text-zinc-100">Customers</a>
+            <a href="#" class="transition-colors hover:text-zinc-100">Changelog</a>
+          </nav>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="text-xs font-medium text-zinc-400 transition-colors hover:text-white">Sign in</button>
+          <button
+            class="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-black transition-colors hover:bg-zinc-200"
+          >
+            Get Started
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="relative z-10 pb-20 pt-32">
+      <section class="mx-auto mb-32 max-w-7xl px-6">
+        <div class="mx-auto flex max-w-4xl flex-col items-center space-y-8 text-center">
+          <div
+            class="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 transition-colors hover:bg-white/10"
+          >
+            <span class="relative flex h-2 w-2">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-indigo-500"></span>
+            </span>
+            <span class="text-xs font-medium text-zinc-300">Orbit 2.0 is now available</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-zinc-500 transition-colors group-hover:text-zinc-300"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </div>
+
+          <h1
+            class="bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-5xl font-semibold tracking-tighter text-transparent md:text-7xl lg:text-8xl"
+          >
+            Built for speed.
+          </h1>
+
+          <p class="max-w-2xl text-lg leading-relaxed text-zinc-400 md:text-xl">
+            Meet the issue tracker that works as fast as you do. <br class="hidden md:block" />
+            Keyboard-first, real-time collaboration, and designed for flow.
+          </p>
+
+          <div class="flex items-center gap-4 pt-4">
+            <button
+              class="group relative overflow-hidden rounded-full bg-zinc-100 px-6 py-3 text-sm font-medium text-black transition-transform active:scale-95"
+            >
+              <div
+                class="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 blur opacity-20 transition-opacity group-hover:opacity-40"
+              ></div>
+              <span class="relative flex items-center gap-2">
+                Start building free
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="text-black/60"
+                >
+                  <path
+                    d="M1.5 6H10.5M10.5 6L6 1.5M10.5 6L6 10.5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <button
+              class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-medium text-zinc-300 transition-colors hover:bg-white/10"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-zinc-500"
+              >
+                <path d="m22 8-6 4 6 4V8Z"></path>
+                <rect width="14" height="12" x="2" y="6" rx="2" ry="2"></rect>
+              </svg>
+              Watch workflow
+            </button>
+          </div>
+        </div>
+
+        <div class="group relative mt-24">
+          <div class="absolute -inset-1 rounded-2xl bg-gradient-to-b from-indigo-500/20 to-transparent blur-xl opacity-50 transition duration-1000 group-hover:opacity-75"></div>
+
+          <div class="relative overflow-hidden rounded-xl border border-white/10 bg-[#08080a] shadow-2xl ring-1 ring-white/5">
+            <div class="flex h-12 items-center justify-between border-b border-white/5 bg-[#08080a] px-4">
+              <div class="flex items-center gap-2">
+                <div class="flex gap-1.5">
+                  <div class="h-3 w-3 rounded-full border border-white/5 bg-zinc-800/50"></div>
+                  <div class="h-3 w-3 rounded-full border border-white/5 bg-zinc-800/50"></div>
+                  <div class="h-3 w-3 rounded-full border border-white/5 bg-zinc-800/50"></div>
+                </div>
+                <div class="mx-2 h-4 w-px bg-white/10"></div>
+                <div class="flex items-center gap-2 text-xs font-medium text-zinc-400">
+                  <span class="cursor-pointer hover:text-white">Orbit Engineering</span>
+                  <span class="text-zinc-600">/</span>
+                  <span class="flex items-center gap-1.5 text-white">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="text-indigo-400"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                    Cycle 24
+                  </span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <div class="flex items-center gap-1.5 rounded-md border border-white/5 bg-white/5 px-2 py-1 text-[11px] text-zinc-400">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                  </svg>
+                  <span>Filter</span>
+                  <span class="ml-1 rounded bg-white/10 px-1 text-[9px] text-zinc-300">F</span>
+                </div>
+                <div class="-space-x-2 flex items-center">
+                  <div
+                    class="flex h-6 w-6 items-center justify-center rounded-full border border-[#08080a] bg-zinc-800 text-[10px] font-medium text-white ring-1 ring-white/10"
+                  >
+                    JD
+                  </div>
+                  <div
+                    class="flex h-6 w-6 items-center justify-center rounded-full border border-[#08080a] bg-indigo-900 text-[10px] font-medium text-indigo-200 ring-1 ring-white/10"
+                  >
+                    AL
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex h-[500px]">
+              <div class="hidden w-56 flex-col gap-6 border-r border-white/5 bg-[#0a0a0c] p-3 sm:flex">
+                <div class="space-y-0.5">
+                  <div class="flex items-center justify-between rounded-md bg-white/5 px-2 py-1.5 text-xs font-medium text-white">
+                    <span class="flex items-center gap-2">
+                      <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                      </svg>
+                      Search
+                    </span>
+                    <span class="text-[10px] text-zinc-500">⌘K</span>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <div>
+                    <div class="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                      Your Items
+                    </div>
+                    <div class="space-y-0.5">
+                      <button
+                        class="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs text-zinc-400 transition hover:bg-white/5 hover:text-zinc-100"
+                      >
+                        <svg class="h-3.5 w-3.5 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                          <line x1="3" y1="9" x2="21" y2="9"></line>
+                          <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                        My Issues
+                        <span class="ml-auto text-zinc-600">4</span>
+                      </button>
+                      <button
+                        class="flex w-full items-center gap-2 rounded bg-indigo-500/5 px-2 py-1.5 text-left text-xs text-indigo-400"
+                      >
+                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <path d="m16 12-4-4-4 4"></path>
+                          <path d="M12 16V8"></path>
+                        </svg>
+                        Active Cycle
+                        <span class="ml-auto text-indigo-500/60">12</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                      Projects
+                    </div>
+                    <div class="space-y-0.5">
+                      <button
+                        class="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs text-zinc-400 transition hover:bg-white/5 hover:text-zinc-100"
+                      >
+                        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span> API V2
+                      </button>
+                      <button
+                        class="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs text-zinc-400 transition hover:bg-white/5 hover:text-zinc-100"
+                      >
+                        <span class="h-1.5 w-1.5 rounded-full bg-orange-500"></span> Mobile App
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-1 flex-col overflow-hidden bg-[#08080a]">
+                <div
+                  class="grid grid-cols-[auto_1fr_auto_auto] gap-4 border-b border-white/5 px-6 py-3 text-[11px] font-medium uppercase tracking-wider text-zinc-500"
+                >
+                  <div class="w-5"></div>
+                  <div>Title</div>
+                  <div class="w-24">Status</div>
+                  <div class="w-16 text-right">Priority</div>
+                </div>
+
+                <div class="overflow-y-auto">
+                  <div class="flex items-center gap-2 border-b border-white/5 bg-white/[0.02] px-6 py-3">
+                    <div
+                      class="flex h-4 w-4 items-center justify-center rounded-full border border-indigo-500/30 bg-indigo-500/10"
+                    >
+                      <div class="h-1.5 w-1.5 rounded-full bg-indigo-500"></div>
+                    </div>
+                    <span class="text-xs font-medium text-indigo-200">Current Cycle</span>
+                    <span class="text-xs text-zinc-600">Oct 24 - Nov 7</span>
+                  </div>
+
+                  <div class="group flex items-center border-b border-white/5 transition-colors hover:bg-white/[0.02]">
+                    <div class="grid w-full grid-cols-[auto_1fr_auto_auto] items-center gap-4 px-6 py-3">
+                      <div class="w-5">
+                        <div
+                          class="flex h-4 w-4 cursor-pointer items-center justify-center rounded border border-zinc-700 bg-transparent transition-colors group-hover:border-zinc-500"
+                        ></div>
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="text-sm font-medium text-zinc-200">Design system consistency audit</span>
+                        <span class="text-[11px] font-mono text-zinc-500">ORB-1024</span>
+                      </div>
+                      <div class="w-24">
+                        <div
+                          class="inline-flex items-center gap-1.5 rounded-md border border-yellow-500/20 bg-yellow-500/10 px-2 py-1 text-[10px] font-medium text-yellow-500"
+                        >
+                          <svg class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 6v6l4 2"></path>
+                          </svg>
+                          In Progress
+                        </div>
+                      </div>
+                      <div class="w-16 text-right">
+                        <svg class="ml-auto h-4 w-4 text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M3 21h18"></path>
+                          <path d="M5 21V7l8-4 8 4v14"></path>
+                          <path d="M17 21v-8.5a5 5 0 0 0-5-5"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="group flex items-center border-b border-white/5 border-l-2 border-l-indigo-500 bg-white/[0.04] transition-colors"
+                  >
+                    <div class="grid w-full grid-cols-[auto_1fr_auto_auto] items-center gap-4 px-[22px] py-3">
+                      <div class="w-5">
+                        <div
+                          class="flex h-4 w-4 cursor-pointer items-center justify-center rounded border border-indigo-500/50 bg-indigo-500/20"
+                        >
+                          <svg class="h-2.5 w-2.5 text-indigo-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="text-sm font-medium text-white">Integrate GitHub Webhooks</span>
+                        <div class="flex items-center gap-2">
+                          <span class="text-[11px] font-mono text-zinc-500">ORB-1025</span>
+                          <span class="rounded border border-white/5 bg-white/10 px-1 text-[10px] text-zinc-400">Backend</span>
+                        </div>
+                      </div>
+                      <div class="w-24">
+                        <div
+                          class="inline-flex items-center gap-1.5 rounded-md border border-emerald-500/20 bg-emerald-500/10 px-2 py-1 text-[10px] font-medium text-emerald-500"
+                        >
+                          <svg class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                          </svg>
+                          Done
+                        </div>
+                      </div>
+                      <div class="w-16 text-right">
+                        <svg class="ml-auto h-4 w-4 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="group flex items-center border-b border-white/5 transition-colors hover:bg-white/[0.02]">
+                    <div class="grid w-full grid-cols-[auto_1fr_auto_auto] items-center gap-4 px-6 py-3">
+                      <div class="w-5">
+                        <div
+                          class="flex h-4 w-4 cursor-pointer items-center justify-center rounded border border-zinc-700 bg-transparent transition-colors group-hover:border-zinc-500"
+                        ></div>
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="text-sm font-medium text-zinc-200">Optimize database queries for dashboard</span>
+                        <span class="text-[11px] font-mono text-zinc-500">ORB-1026</span>
+                      </div>
+                      <div class="w-24">
+                        <div
+                          class="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-zinc-800 px-2 py-1 text-[10px] font-medium text-zinc-400"
+                        >
+                          <svg class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                          </svg>
+                          Todo
+                        </div>
+                      </div>
+                      <div class="w-16 text-right">
+                        <svg class="ml-auto h-4 w-4 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M12 2v4"></path>
+                          <path d="M12 18v4"></path>
+                          <path d="M4.93 4.93l2.83 2.83"></path>
+                          <path d="M16.24 16.24l2.83 2.83"></path>
+                          <path d="M2 12h4"></path>
+                          <path d="M18 12h4"></path>
+                          <path d="M4.93 19.07l2.83-2.83"></path>
+                          <path d="M16.24 7.76l2.83-2.83"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="group flex items-center border-b border-white/5 transition-colors hover:bg-white/[0.02]">
+                    <div class="grid w-full grid-cols-[auto_1fr_auto_auto] items-center gap-4 px-6 py-3">
+                      <div class="w-5">
+                        <div
+                          class="flex h-4 w-4 cursor-pointer items-center justify-center rounded border border-zinc-700 bg-transparent transition-colors group-hover:border-zinc-500"
+                        ></div>
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="text-sm font-medium text-zinc-200">Update dark mode tokens</span>
+                        <span class="text-[11px] font-mono text-zinc-500">ORB-1027</span>
+                      </div>
+                      <div class="w-24">
+                        <div
+                          class="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-zinc-800 px-2 py-1 text-[10px] font-medium text-zinc-400"
+                        >
+                          <svg class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                          </svg>
+                          Todo
+                        </div>
+                      </div>
+                      <div class="w-16 text-right">
+                        <svg class="ml-auto h-4 w-4 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mx-auto mb-32 max-w-7xl px-6">
+        <div class="mb-12">
+          <h2 class="text-3xl font-semibold tracking-tight text-white">Workflow optimized.</h2>
+          <p class="mt-2 text-zinc-400">Tools that stay out of your way.</p>
+        </div>
+
+        <div class="grid h-[600px] grid-cols-1 grid-rows-2 gap-4 md:grid-cols-3">
+          <div class="relative row-span-2 overflow-hidden rounded-2xl border border-white/10 bg-[#08080a] p-8 md:col-span-2">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-900/20 via-[#08080a] to-[#08080a]"></div>
+            <div class="relative z-10 flex h-full flex-col justify-between">
+              <div>
+                <div
+                  class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-zinc-800 text-zinc-300"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m18 15-6-6-6 6"></path>
+                  </svg>
+                </div>
+                <h3 class="mb-2 text-xl font-medium text-white">Command Menu</h3>
+                <p class="max-w-sm text-sm text-zinc-400">
+                  Access any issue, view, or setting in milliseconds without lifting your hands from the keyboard.
+                </p>
+              </div>
+              <div class="relative mx-auto mt-8 w-full max-w-md">
+                <div
+                  class="transform rounded-lg border border-white/10 bg-[#121214] p-2 shadow-2xl transition-transform duration-500 group-hover:-translate-y-2"
+                >
+                  <div class="mb-1 flex items-center gap-3 border-b border-white/5 px-3 py-2">
+                    <svg class="h-4 w-4 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <span class="text-sm text-zinc-300">cre...</span>
+                    <span class="ml-auto rounded bg-white/5 px-1.5 text-xs text-zinc-600">Esc</span>
+                  </div>
+                  <div class="space-y-1">
+                    <div
+                      class="flex items-center justify-between rounded border border-indigo-500/20 bg-indigo-500/10 px-3 py-2 text-sm text-indigo-100"
+                    >
+                      <span class="flex items-center gap-2">
+                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M12 5v14M5 12h14"></path>
+                        </svg>
+                        Create new issue
+                      </span>
+                      <span class="text-[10px] opacity-60">C</span>
+                    </div>
+                    <div
+                      class="flex items-center justify-between rounded px-3 py-2 text-sm text-zinc-400 transition hover:bg-white/5"
+                    >
+                      <span class="flex items-center gap-2">
+                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                          <line x1="9" y1="3" x2="9" y2="21"></line>
+                        </svg>
+                        Create new view
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#08080a] p-6">
+            <div class="relative z-10">
+              <h3 class="mb-1 text-lg font-medium text-white">Insights</h3>
+              <p class="text-xs text-zinc-400">Real-time velocity tracking.</p>
+              <div class="mt-6 flex h-24 w-full items-end gap-2">
+                <div
+                  class="relative h-[40%] w-full overflow-hidden rounded-t bg-zinc-800/30 transition-colors duration-300 group-hover:bg-indigo-500/20"
+                >
+                  <div class="absolute bottom-0 h-[0%] w-full bg-indigo-500 transition-all duration-700 group-hover:h-full"></div>
+                </div>
+                <div
+                  class="relative h-[65%] w-full overflow-hidden rounded-t bg-zinc-800/30 transition-colors duration-300 delay-75 group-hover:bg-indigo-500/20"
+                >
+                  <div class="absolute bottom-0 h-[0%] w-full bg-indigo-500 transition-all duration-700 delay-75 group-hover:h-full"></div>
+                </div>
+                <div
+                  class="relative h-[50%] w-full overflow-hidden rounded-t bg-zinc-800/30 transition-colors duration-300 delay-100 group-hover:bg-indigo-500/20"
+                >
+                  <div class="absolute bottom-0 h-[0%] w-full bg-indigo-500 transition-all duration-700 delay-100 group-hover:h-full"></div>
+                </div>
+                <div
+                  class="relative h-[85%] w-full overflow-hidden rounded-t bg-zinc-800/30 transition-colors duration-300 delay-150 group-hover:bg-indigo-500/20"
+                >
+                  <div class="absolute bottom-0 h-[0%] w-full bg-indigo-500 transition-all duration-700 delay-150 group-hover:h-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#08080a] p-6">
+            <div class="absolute inset-0 z-10 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            <div class="relative z-20">
+              <h3 class="mb-1 text-lg font-medium text-white">Git Sync</h3>
+              <p class="text-xs text-zinc-400">Updates status on merge.</p>
+              <div
+                class="mt-6 rounded border border-white/5 bg-black/50 p-3 font-mono text-[10px] leading-relaxed text-zinc-400"
+              >
+                <p class="text-emerald-400">✓ Merged PR #402</p>
+                <p class="mt-1">
+                  <span class="text-purple-400">orbit-bot</span> moved <span class="text-white">ORB-129</span> to
+                  <span class="text-blue-400">Done</span>
+                </p>
+                <p class="mt-1 opacity-50">2 mins ago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mx-auto mb-32 max-w-7xl border-t border-white/5 px-6 pt-20">
+        <div class="mb-12 flex flex-col items-end justify-between gap-4 md:flex-row">
+          <div>
+            <h2 class="text-2xl font-semibold text-white">Loved by builders</h2>
+            <p class="mt-2 text-sm text-zinc-400">Powering next-gen software companies.</p>
+          </div>
+          <div class="mt-4 flex gap-4 md:mt-0">
+            <svg class="h-6 w-auto text-zinc-600" viewBox="0 0 100 30" fill="currentColor">
+              <path d="M10,15 L20,5 L30,15 L20,25 Z M40,5 H50 V25 H40 Z M60,5 H80 V10 H65 V12 H75 V17 H65 V25 H60 Z"></path>
+            </svg>
+            <svg class="h-6 w-auto text-zinc-600" viewBox="0 0 100 30" fill="currentColor">
+              <circle cx="15" cy="15" r="10"></circle>
+              <rect x="35" y="5" width="10" height="20"></rect>
+              <rect x="55" y="5" width="20" height="5"></rect>
+              <rect x="55" y="12" width="15" height="5"></rect>
+              <rect x="55" y="19" width="20" height="5"></rect>
+            </svg>
+            <svg class="h-6 w-auto text-zinc-600" viewBox="0 0 100 30" fill="currentColor">
+              <path d="M10,25 L20,5 L30,25 M15,18 H25 M40,5 H60 M50,5 V25 M70,5 H90 V10 H75 V25 H70 Z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div class="rounded-xl border border-white/5 bg-white/[0.02] p-6">
+            <p class="text-sm leading-relaxed text-zinc-300">
+              "Orbit is the first tool that actually feels faster than using a spreadsheet. The keyboard shortcuts are muscle
+              memory now."
+            </p>
+            <div class="mt-4 flex items-center gap-3">
+              <div class="h-8 w-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600"></div>
+              <div>
+                <div class="text-xs font-medium text-white">Alex Rivera</div>
+                <div class="text-[10px] text-zinc-500">CTO at Vertex</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-xl border border-white/5 bg-white/[0.02] p-6">
+            <p class="text-sm leading-relaxed text-zinc-300">
+              "We switched from Jira and haven't looked back. The clarity it brings to our sprint planning is unmatched."
+            </p>
+            <div class="mt-4 flex items-center gap-3">
+              <div class="h-8 w-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-600"></div>
+              <div>
+                <div class="text-xs font-medium text-white">Sarah Chen</div>
+                <div class="text-[10px] text-zinc-500">PM at Scale AI</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-xl border border-white/5 bg-white/[0.02] p-6">
+            <p class="text-sm leading-relaxed text-zinc-300">
+              "The Git integration is flawless. My ticket status updates automatically when I merge PRs. Pure magic."
+            </p>
+            <div class="mt-4 flex items-center gap-3">
+              <div class="h-8 w-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600"></div>
+              <div>
+                <div class="text-xs font-medium text-white">James Wilson</div>
+                <div class="text-[10px] text-zinc-500">Senior Eng at Stripe</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mx-auto mb-20 max-w-4xl px-6">
+        <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#08080a] p-12 text-center">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-transparent to-transparent"></div>
+          <div class="relative z-10">
+            <h2 class="mb-4 text-3xl font-semibold tracking-tight text-white md:text-4xl">Ready to ship faster?</h2>
+            <p class="mx-auto mb-8 max-w-lg text-zinc-400">
+              Join high-performing engineering teams using Orbit to manage their roadmap.
+            </p>
+
+            <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <button
+                class="w-full rounded-full bg-white px-8 py-3 text-sm font-medium text-black transition-colors hover:bg-zinc-200 sm:w-auto"
+              >
+                Start for free
+              </button>
+              <button
+                class="w-full rounded-full border border-white/10 bg-transparent px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-white/5 sm:w-auto"
+              >
+                Talk to sales
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-[#030304] border-t border-white/5 pb-12 pt-12">
+      <div class="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 md:grid-cols-4">
+        <div>
+          <h4 class="mb-4 text-sm font-medium text-white">Product</h4>
+          <ul class="space-y-2 text-xs text-zinc-500">
+            <li><a href="#" class="hover:text-zinc-300">Features</a></li>
+            <li><a href="#" class="hover:text-zinc-300">Integrations</a></li>
+            <li><a href="#" class="hover:text-zinc-300">Pricing</a></li>
+            <li><a href="#" class="hover:text-zinc-300">Changelog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="mb-4 text-sm font-medium text-white">Company</h4>
+          <ul class="space-y-2 text-xs text-zinc-500">
+            <li><a href="#" class="hover:text-zinc-300">About</a></li>
+            <li><a href="#" class="hover:text-zinc-300">Blog</a></li>
+            <li><a href="#" class="hover:text-zinc-300">Careers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="mb-4 text-sm font-medium text-white">Resources</h4>
+          <ul class="space-y-2 text-xs text-zinc-500">
+            <li><a href="#" class="hover:text-zinc-300">Community</a></li>
+            <li><a href="#" class="hover:text-zinc-300">Help Center</a></li>
+            <li><a href="#" class="hover:text-zinc-300">API Docs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="mb-4 text-sm font-medium text-white">Legal</h4>
+          <ul class="space-y-2 text-xs text-zinc-500">
+            <li><a href="#" class="hover:text-zinc-300">Privacy</a></li>
+            <li><a href="#" class="hover:text-zinc-300">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mx-auto mt-12 flex max-w-7xl flex-col items-center justify-between gap-4 px-6 text-xs text-zinc-600 md:flex-row">
+        <p>© 2024 Orbit Inc. All rights reserved.</p>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-zinc-400">Twitter</a>
+          <a href="#" class="hover:text-zinc-400">GitHub</a>
+          <a href="#" class="hover:text-zinc-400">Discord</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

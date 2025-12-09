@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevForge Academy - Master the Code</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+/* Marquee Animation */
+@keyframes scroll {
+0% { transform: translateX(0); }
+100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+animation: scroll 40s linear infinite;
+}
+.animate-marquee:hover {
+animation-play-state: paused;
+}
+/* Fade Transition */
+.fade-enter {
+opacity: 0;
+transform: translateY(10px);
+transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-enter-active {
+opacity: 1;
+transform: translateY(0);
+}
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+display: none;
+}
+.no-scrollbar {
+-ms-overflow-style: none;
+scrollbar-width: none;
+}
+</style>
+<link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style></head>
+<body class="bg-[#E4E9E5] text-[#18181B] antialiased selection:bg-[#9EF0A0] selection:text-[#18181B]">
+
+    <!-- Floating Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#18181B]/80 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
+        <div class="px-6 py-4 flex justify-between items-center max-w-[1600px] mx-auto">
+            <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" class="iconify text-[#9EF0A0]" aria-hidden="true" role="img" data-icon="solar:code-square-bold-duotone"><path fill="currentColor" d="m13.792 21.319l-.597 1.008c-.531.897-1.859.897-2.39 0l-.597-1.008c-.462-.781-.693-1.172-1.065-1.388c-.371-.216-.84-.224-1.774-.24c-1.381-.024-2.247-.109-2.974-.41a5.5 5.5 0 0 1-2.976-2.976C1 15.294 1 14.013 1 11.45v-1.1c0-3.6 0-5.401.81-6.724A5.5 5.5 0 0 1 3.626 1.81C4.95 1 6.75 1 10.35 1h3.3c3.6 0 5.401 0 6.724.81a5.5 5.5 0 0 1 1.816 1.816C23 4.95 23 6.75 23 10.35v1.1c0 2.563 0 3.844-.419 4.855a5.5 5.5 0 0 1-2.976 2.976c-.727.301-1.593.386-2.974.41c-.935.016-1.403.024-1.774.24c-.372.216-.603.607-1.065 1.388" opacity=".5"></path><path fill="currentColor" fill-rule="evenodd" d="M15.267 6.83a.825.825 0 0 1 1.167 0l.188.188l.04.04c.7.7 1.283 1.282 1.683 1.807c.423.554.72 1.14.72 1.848s-.297 1.294-.72 1.848c-.4.524-.983 1.107-1.682 1.806l-.23.23a.825.825 0 0 1-1.166-1.167l.189-.19c.75-.749 1.252-1.254 1.577-1.68c.31-.407.381-.644.381-.847s-.07-.44-.38-.847c-.326-.426-.828-.931-1.578-1.681l-.189-.189a.825.825 0 0 1 0-1.166m-1.63-2.226c.44.118.701.57.583 1.01L11.373 16.24a.825.825 0 1 1-1.594-.427l2.847-10.625a.825.825 0 0 1 1.01-.584M8.733 6.83a.825.825 0 0 0-1.167 0l-.188.188l-.04.04c-.7.7-1.283 1.282-1.683 1.807c-.423.554-.72 1.14-.72 1.848s.297 1.294.72 1.848c.4.524.983 1.107 1.682 1.806l.23.23a.825.825 0 0 0 1.166-1.167l-.189-.19c-.75-.749-1.252-1.254-1.577-1.68c-.31-.407-.381-.644-.381-.847s.07-.44.38-.847c.326-.426.828-.931 1.578-1.681l.189-.189a.825.825 0 0 0 0-1.166" clip-rule="evenodd"></path></svg>
+                <span class="text-lg font-semibold tracking-tight text-white">DevForge</span>
+            </div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-8 text-sm font-medium text-[#A1A1AA]">
+                <a href="#" class="hover:text-white transition-colors">Curriculum</a>
+                <a href="#" class="hover:text-white transition-colors">Mentorship</a>
+                <a href="#" class="hover:text-white transition-colors">Tuition</a>
+                <a href="#" class="hover:text-white transition-colors">Outcomes</a>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#" class="text-sm font-medium text-white hover:text-[#9EF0A0] transition-colors">Log In</a>
+                <a href="#" class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#9EF0A0] text-[#18181B] text-sm font-semibold hover:bg-[#8BE08D] transition-all">
+                    Apply Now
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="menu-btn" class="md:hidden text-white p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-[#18181B] border-b border-white/10 p-6 flex-col gap-4 shadow-2xl">
+            <a href="#" class="text-[#A1A1AA] hover:text-white text-lg font-medium">Curriculum</a>
+            <a href="#" class="text-[#A1A1AA] hover:text-white text-lg font-medium">Mentorship</a>
+            <a href="#" class="text-[#A1A1AA] hover:text-white text-lg font-medium">Tuition</a>
+            <a href="#" class="text-[#A1A1AA] hover:text-white text-lg font-medium">Outcomes</a>
+            <hr class="border-white/10 my-2">
+            <a href="#" class="text-white text-lg font-medium">Log In</a>
+            <a href="#" class="bg-[#9EF0A0] text-[#18181B] text-center py-3 rounded-lg font-semibold">Apply Now</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="lg:px-10 overflow-hidden text-white bg-[#18181B] rounded-b-[3rem] pt-12 pr-6 pb-24 pl-6 relative pt-28">
+        <div class="max-w-[1400px] mx-auto">
+            
+            <!-- Top Hero Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center mb-20">
+                
+                <!-- Left Column -->
+                <div class="lg:col-span-6 flex flex-col gap-8 z-10">
+                    <div class="">
+                        <h1 class="lg:text-[5.5rem] leading-[1] text-6xl text-white mb-6 font-medium tracking-tight">
+                            Logic Meets <br>
+                            <span class="text-[#9EF0A0]">Creativity.</span>
+                        </h1>
+                        <p class="text-[#A1A1AA] text-lg font-light leading-relaxed max-w-lg">
+                            We don't just teach syntax; we engineer mindsets. Join the #1 rated coding bootcamp and leave ready to deploy scalable applications on day one.
+                        </p>
+                    </div>
+
+                    <!-- CTA Area -->
+                    <div class="flex flex-wrap items-center gap-6 mt-2">
+                        <a href="#" class="px-8 py-4 bg-[#9EF0A0] text-[#18181B] rounded-xl font-semibold text-base hover:bg-[#8BE08D] transition-colors shadow-[0_0_20px_rgba(158,240,160,0.2)]">
+                            Get Started
+                        </a>
+                        
+                        <div class="flex flex-col border-l border-white/10 pl-6">
+                            <span class="text-sm font-medium text-white">Next Cohort</span>
+                            <span class="text-sm text-[#71717A]">Starts Oct 12</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="lg:col-span-6 relative">
+                    <!-- Image Container -->
+                    <div class="relative rounded-3xl overflow-hidden border border-white/5 bg-[#27272A] aspect-[4/3]">
+                        <div class="absolute top-6 right-6 z-20 bg-white/90 backdrop-blur-md px-4 py-3 rounded-2xl shadow-lg max-w-[180px]">
+                            <div class="text-[10px] font-bold text-[#71717A] uppercase tracking-wider mb-1">5000+ Alumni</div>
+                            <div class="text-sm font-semibold text-[#18181B] leading-tight">See Our Latest Outcome Report</div>
+                        </div>
+
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c366997c-6a03-4ceb-baf5-f1115ea453be_1600w.jpg" alt="Students coding" class="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700">
+                    </div>
+
+                    <!-- Stats Row -->
+                    <div class="flex mt-8 pr-4 pl-4 space-x-4 items-start justify-between">
+                        <div class="text-center lg:text-left">
+                            <h3 class="text-3xl font-medium text-white tracking-tight mb-1">94%</h3>
+                            <p class="text-[#71717A] text-xs font-medium uppercase tracking-wide">Hired Rate</p>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <h3 class="text-3xl font-medium text-[#9EF0A0] tracking-tight mb-1">1.2k+</h3>
+                            <p class="text-[#71717A] text-xs font-medium uppercase tracking-wide">Active Students</p>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <h3 class="text-3xl font-medium text-[#B2A5FE] tracking-tight mb-1">$85k</h3>
+                            <p class="text-[#71717A] text-xs font-medium uppercase tracking-wide">Avg Salary</p>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <h3 class="text-3xl font-medium text-white tracking-tight mb-1">500+</h3>
+                            <p class="text-[#71717A] text-xs font-medium uppercase tracking-wide">Hiring Partners</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scrolling Marquee Cards -->
+            <div class="w-full relative">
+                <!-- Alpha Mask -->
+                <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-[#18181B] via-transparent to-[#18181B]"></div>
+                
+                <div class="flex overflow-hidden w-full">
+                    <div class="flex gap-6 animate-marquee w-max pt-4 pb-4 gap-x-6 gap-y-6">
+    <!-- Card 1: Software Engineering (Consistent Style) -->
+    <div class="w-[350px] bg-[#27272A] rounded-3xl p-8 flex flex-col h-full border border-white/10 hover:border-[#B2A5FE]/50 transition-colors group">
+        <div class="w-12 h-12 bg-[#2E2E32] rounded-full flex items-center justify-center mb-6 text-[#B2A5FE] group-hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:code-circle-bold-duotone" class="iconify text-2xl iconify--solar"><path fill="currentColor" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10" opacity=".5"></path><path fill="currentColor" d="M13.488 6.446a.75.75 0 0 1 .53.918l-2.588 9.66a.75.75 0 0 1-1.449-.389l2.589-9.659a.75.75 0 0 1 .918-.53M14.97 8.47a.75.75 0 0 1 1.06 0l.209.208c.635.635 1.165 1.165 1.529 1.642c.384.504.654 1.036.654 1.68s-.27 1.176-.654 1.68c-.364.477-.894 1.007-1.53 1.642l-.208.208a.75.75 0 1 1-1.06-1.06l.171-.172c.682-.682 1.139-1.14 1.434-1.528c.283-.37.347-.586.347-.77s-.064-.4-.347-.77c-.295-.387-.752-.846-1.434-1.528l-.171-.172a.75.75 0 0 1 0-1.06m-7 0a.75.75 0 0 1 1.06 1.06l-.171.172c-.682.682-1.138 1.14-1.434 1.528c-.283.37-.346.586-.346.77s.063.4.346.77c.296.387.752.846 1.434 1.528l.172.172a.75.75 0 1 1-1.061 1.06l-.208-.208c-.636-.635-1.166-1.165-1.53-1.642c-.384-.504-.653-1.036-.653-1.68s.27-1.176.653-1.68c.364-.477.894-1.007 1.53-1.642z"></path></svg>
+        </div>
+        <h3 class="text-2xl text-white mb-3 font-medium tracking-tight">Software Engineering</h3>
+        <p class="text-[#A1A1AA] text-sm leading-relaxed">
+            Full-stack mastery. From database architecture to reactive front-end interfaces.
+        </p>
+    </div>
+
+    <!-- Card 2: Web Design -->
+    <div class="w-[350px] bg-[#9EF0A0]/5 rounded-3xl p-8 flex flex-col h-full border border-[#9EF0A0]/10 hover:bg-[#9EF0A0]/10 transition-colors group">
+        <div class="w-12 h-12 bg-[#9EF0A0] rounded-full flex items-center justify-center mb-6 text-[#18181B] group-hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:monitor-smartphone-bold-duotone" class="iconify text-2xl iconify--solar"><path fill="currentColor" fill-rule="evenodd" d="M22 15v3c0 1.886 0 2.828-.586 3.414S19.886 22 18 22s-2.828 0-3.414-.586S14 19.886 14 18v-3c0-1.886 0-2.828.586-3.414S16.114 11 18 11s2.828 0 3.414.586S22 13.114 22 15m-5.75 5a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1-.75-.75" clip-rule="evenodd"></path><path fill="currentColor" d="M8 17c-2.829 0-4.243 0-5.122-.879c-.569-.569-.807-1.363-.878-2.621V13h10.516v.5c-.016.437-.016.912-.016 1.41v3.18c0 .865 0 1.659.086 2.304c.096.711.32 1.463.939 2.08l.025.026H8A.75.75 0 0 1 8 21h3.25v-4z"></path><path fill="currentColor" d="M10 2h4c3.771 0 5.657 0 6.828 1.172S22 6.229 22 10v.138c-.508-.333-1.069-.48-1.606-.551C19.75 9.5 18.955 9.5 18.09 9.5h-.18c-.865 0-1.659 0-2.304.087c-.711.095-1.463.32-2.08.938c-.588.588-.82 1.296-.924 1.975v.5H2v-.5c-.007-.45 0-.948 0-1.5v-1c0-3.771 0-5.657 1.172-6.828S6.229 2 10 2" opacity=".5"></path></svg>
+        </div>
+        <h3 class="text-2xl text-[#9EF0A0] mb-3 font-medium tracking-tight">Web Design</h3>
+        <p class="text-[#A1A1AA] text-sm leading-relaxed">
+            Master modern UI/UX principles and implement them with React and Tailwind CSS.
+        </p>
+    </div>
+
+    <!-- Card 3: Digital Transformation -->
+    <div class="w-[350px] bg-[#B2A5FE]/5 rounded-3xl p-8 flex flex-col h-full border border-[#B2A5FE]/10 hover:bg-[#B2A5FE]/10 transition-colors group">
+        <div class="w-12 h-12 bg-[#B2A5FE] rounded-full flex items-center justify-center mb-6 text-[#18181B] group-hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:rocket-bold-duotone" class="iconify text-2xl iconify--solar"><path fill="currentColor" fill-rule="evenodd" d="m14.447 16.377l5.847-5.83c.842-.839 1.263-1.259 1.484-1.792S22 7.627 22 6.44v-.567c0-1.826 0-2.739-.569-3.306S19.947 2 18.116 2h-.57c-1.19 0-1.785 0-2.32.221c-.536.221-.957.641-1.8 1.48L7.58 9.531c-.984.98-1.594 1.589-1.83 2.176a1.5 1.5 0 0 0-.112.562c0 .802.647 1.448 1.942 2.739l.174.173l2.038-2.069a.75.75 0 1 1 1.069 1.053L8.816 16.24l.137.137c1.295 1.29 1.943 1.936 2.747 1.936c.178 0 .348-.031.519-.094c.603-.222 1.219-.836 2.228-1.842m2.747-6.846a1.946 1.946 0 0 1-2.747 0a1.93 1.93 0 0 1 0-2.738a1.946 1.946 0 0 1 2.747 0a1.93 1.93 0 0 1 0 2.738" clip-rule="evenodd"></path><path fill="currentColor" d="M9.034 5.963L6.491 8.5c-.467.466-.896.893-1.235 1.28a6 6 0 0 0-.619.82l-.024-.025l-.095-.094a4.9 4.9 0 0 0-1.532-1.004l-.123-.05l-.379-.15a.764.764 0 0 1-.259-1.252C3.345 6.907 4.69 5.566 5.34 5.297a3.4 3.4 0 0 1 1.788-.229c.546.081 1.063.362 1.907.895m4.342 13.35c.205.208.34.355.464.512q.243.311.434.658c.142.26.253.537.474 1.092a.69.69 0 0 0 1.126.224l.084-.083c1.12-1.117 2.465-2.458 2.735-3.105a3.35 3.35 0 0 0 .229-1.782c-.081-.545-.362-1.06-.897-1.902l-2.552 2.544c-.478.477-.916.914-1.313 1.256c-.237.206-.497.41-.784.586" opacity=".5"></path></svg>
+        </div>
+        <h3 class="text-2xl text-[#B2A5FE] mb-3 font-medium tracking-tight">Digital Transformation</h3>
+        <p class="text-[#A1A1AA] text-sm leading-relaxed">
+            Learn how to architect scalable systems that drive business growth and efficiency.
+        </p>
+    </div>
+
+    <!-- Card 4: Data Science (New) -->
+    <div class="w-[350px] bg-[#27272A] rounded-3xl p-8 flex flex-col h-full border border-white/10 hover:border-white/30 transition-colors group">
+        <div class="w-12 h-12 bg-[#2E2E32] rounded-full flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:chart-2-bold-duotone" class="iconify text-2xl iconify--solar"><path fill="currentColor" d="M3.293 9.293C3 9.586 3 10.057 3 11v6c0 .943 0 1.414.293 1.707S4.057 19 5 19s1.414 0 1.707-.293S7 17.943 7 17v-6c0-.943 0-1.414-.293-1.707S5.943 9 5 9s-1.414 0-1.707.293"></path><path fill="currentColor" d="M17.293 2.293C17 2.586 17 3.057 17 4v13c0 .943 0 1.414.293 1.707S18.057 19 19 19s1.414 0 1.707-.293S21 17.943 21 17V4c0-.943 0-1.414-.293-1.707S19.943 2 19 2s-1.414 0-1.707.293" opacity=".4"></path><path fill="currentColor" d="M10 7c0-.943 0-1.414.293-1.707S11.057 5 12 5s1.414 0 1.707.293S14 6.057 14 7v10c0 .943 0 1.414-.293 1.707S12.943 19 12 19s-1.414 0-1.707-.293S10 17.943 10 17z" opacity=".7"></path><path fill="currentColor" d="M3 21.25a.75.75 0 0 0 0 1.5h18a.75.75 0 0 0 0-1.5z"></path></svg>
+        </div>
+        <h3 class="text-2xl text-white mb-3 font-medium tracking-tight">Data Science</h3>
+        <p class="text-[#A1A1AA] text-sm leading-relaxed">
+            Extract insights from complex datasets using Python, SQL, and Machine Learning.
+        </p>
+    </div>
+
+    <!-- Duplicate Cards for Loop -->
+    <!-- Card 1 Duplicate -->
+    <div class="w-[350px] bg-[#27272A] rounded-3xl p-8 flex flex-col h-full border border-white/10 hover:border-[#B2A5FE]/50 transition-colors group">
+        <div class="w-12 h-12 bg-[#2E2E32] rounded-full flex items-center justify-center mb-6 text-[#B2A5FE] group-hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:code-circle-bold-duotone" class="iconify text-2xl iconify--solar"><path fill="currentColor" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10" opacity=".5"></path><path fill="currentColor" d="M13.488 6.446a.75.75 0 0 1 .53.918l-2.588 9.66a.75.75 0 0 1-1.449-.389l2.589-9.659a.75.75 0 0 1 .918-.53M14.97 8.47a.75.75 0 0 1 1.06 0l.209.208c.635.635 1.165 1.165 1.529 1.642c.384.504.654 1.036.654 1.68s-.27 1.176-.654 1.68c-.364.477-.894 1.007-1.53 1.642l-.208.208a.75.75 0 1 1-1.06-1.06l.171-.172c.682-.682 1.139-1.14 1.434-1.528c.283-.37.347-.586.347-.77s-.064-.4-.347-.77c-.295-.387-.752-.846-1.434-1.528l-.171-.172a.75.75 0 0 1 0-1.06m-7 0a.75.75 0 0 1 1.06 1.06l-.171.172c-.682.682-1.138 1.14-1.434 1.528c-.283.37-.346.586-.346.77s.063.4.346.77c.296.387.752.846 1.434 1.528l.172.172a.75.75 0 1 1-1.061 1.06l-.208-.208c-.636-.635-1.166-1.165-1.53-1.642c-.384-.504-.653-1.036-.653-1.68s.27-1.176.653-1.68c.364-.477.894-1.007 1.53-1.642z"></path></svg>
+        </div>
+        <h3 class="text-2xl text-white mb-3 font-medium tracking-tight">Software Engineering</h3>
+        <p class="text-[#A1A1AA] text-sm leading-relaxed">
+            Full-stack mastery. From database architecture to reactive front-end interfaces.
+        </p>
+    </div>
+    <!-- Card 2 Duplicate -->
+    <div class="w-[350px] bg-[#9EF0A0]/5 rounded-3xl p-8 flex flex-col h-full border border-[#9EF0A0]/10 hover:bg-[#9EF0A0]/10 transition-colors group">
+        <div class="w-12 h-12 bg-[#9EF0A0] rounded-full flex items-center justify-center mb-6 text-[#18181B] group-hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:monitor-smartphone-bold-duotone" class="iconify text-2xl iconify--solar"><path fill="currentColor" fill-rule="evenodd" d="M22 15v3c0 1.886 0 2.828-.586 3.414S19.886 22 18 22s-2.828 0-3.414-.586S14 19.886 14 18v-3c0-1.886 0-2.828.586-3.414S16.114 11 18 11s2.828 0 3.414.586S22 13.114 22 15m-5.75 5a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1-.75-.75" clip-rule="evenodd"></path><path fill="currentColor" d="M8 17c-2.829 0-4.243 0-5.122-.879c-.569-.569-.807-1.363-.878-2.621V13h10.516v.5c-.016.437-.016.912-.016 1.41v3.18c0 .865 0 1.659.086 2.304c.096.711.32 1.463.939 2.08l.025.026H8A.75.75 0 0 1 8 21h3.25v-4z"></path><path fill="currentColor" d="M10 2h4c3.771 0 5.657 0 6.828 1.172S22 6.229 22 10v.138c-.508-.333-1.069-.48-1.606-.551C19.75 9.5 18.955 9.5 18.09 9.5h-.18c-.865 0-1.659 0-2.304.087c-.711.095-1.463.32-2.08.938c-.588.588-.82 1.296-.924 1.975v.5H2v-.5c-.007-.45 0-.948 0-1.5v-1c0-3.771 0-5.657 1.172-6.828S6.229 2 10 2" opacity=".5"></path></svg>
+        </div>
+        <h3 class="text-2xl text-[#9EF0A0] mb-3 font-medium tracking-tight">Web Design</h3>
+        <p class="text-[#A1A1AA] text-sm leading-relaxed">
+            Master modern UI/UX principles and implement them with React and Tailwind CSS.
+        </p>
+    </div>
+    <!-- Card 3 Duplicate -->
+    <div class="w-[350px] bg-[#B2A5FE]/5 rounded-3xl p-8 flex flex-col h-full border border-[#B2A5FE]/10 hover:bg-[#B2A5FE]/10 transition-colors group">
+        <div class="w-12 h-12 bg-[#B2A5FE] rounded-full flex items-center justify-center mb-6 text-[#18181B] group-hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:rocket-bold-duotone" class="iconify text-2xl iconify--solar"><path fill="currentColor" fill-rule="evenodd" d="m14.447 16.377l5.847-5.83c.842-.839 1.263-1.259 1.484-1.792S22 7.627 22 6.44v-.567c0-1.826 0-2.739-.569-3.306S19.947 2 18.116 2h-.57c-1.19 0-1.785 0-2.32.221c-.536.221-.957.641-1.8 1.48L7.58 9.531c-.984.98-1.594 1.589-1.83 2.176a1.5 1.5 0 0 0-.112.562c0 .802.647 1.448 1.942 2.739l.174.173l2.038-2.069a.75.75 0 1 1 1.069 1.053L8.816 16.24l.137.137c1.295 1.29 1.943 1.936 2.747 1.936c.178 0 .348-.031.519-.094c.603-.222 1.219-.836 2.228-1.842m2.747-6.846a1.946 1.946 0 0 1-2.747 0a1.93 1.93 0 0 1 0-2.738a1.946 1.946 0 0 1 2.747 0a1.93 1.93 0 0 1 0 2.738" clip-rule="evenodd"></path><path fill="currentColor" d="M9.034 5.963L6.491 8.5c-.467.466-.896.893-1.235 1.28a6 6 0 0 0-.619.82l-.024-.025l-.095-.094a4.9 4.9 0 0 0-1.532-1.004l-.123-.05l-.379-.15a.764.764 0 0 1-.259-1.252C3.345 6.907 4.69 5.566 5.34 5.297a3.4 3.4 0 0 1 1.788-.229c.546.081 1.063.362 1.907.895m4.342 13.35c.205.208.34.355.464.512q.243.311.434.658c.142.26.253.537.474 1.092a.69.69 0 0 0 1.126.224l.084-.083c1.12-1.117 2.465-2.458 2.735-3.105a3.35 3.35 0 0 0 .229-1.782c-.081-.545-.362-1.06-.897-1.902l-2.552 2.544c-.478.477-.916.914-1.313 1.256c-.237.206-.497.41-.784.586" opacity=".5"></path></svg>
+        </div>
+        <h3 class="text-2xl text-[#B2A5FE] mb-3 font-medium tracking-tight">Digital Transformation</h3>
+        <p class="text-[#A1A1AA] text-sm leading-relaxed">
+            Learn how to architect scalable systems that drive business growth and efficiency.
+        </p>
+    </div>
+    <!-- Card 4 Duplicate -->
+    <div class="w-[350px] bg-[#27272A] rounded-3xl p-8 flex flex-col h-full border border-white/10 hover:border-white/30 transition-colors group">
+        <div class="w-12 h-12 bg-[#2E2E32] rounded-full flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:chart-2-bold-duotone" class="iconify text-2xl iconify--solar"><path fill="currentColor" d="M3.293 9.293C3 9.586 3 10.057 3 11v6c0 .943 0 1.414.293 1.707S4.057 19 5 19s1.414 0 1.707-.293S7 17.943 7 17v-6c0-.943 0-1.414-.293-1.707S5.943 9 5 9s-1.414 0-1.707.293"></path><path fill="currentColor" d="M17.293 2.293C17 2.586 17 3.057 17 4v13c0 .943 0 1.414.293 1.707S18.057 19 19 19s1.414 0 1.707-.293S21 17.943 21 17V4c0-.943 0-1.414-.293-1.707S19.943 2 19 2s-1.414 0-1.707.293" opacity=".4"></path><path fill="currentColor" d="M10 7c0-.943 0-1.414.293-1.707S11.057 5 12 5s1.414 0 1.707.293S14 6.057 14 7v10c0 .943 0 1.414-.293 1.707S12.943 19 12 19s-1.414 0-1.707-.293S10 17.943 10 17z" opacity=".7"></path><path fill="currentColor" d="M3 21.25a.75.75 0 0 0 0 1.5h18a.75.75 0 0 0 0-1.5z"></path></svg>
+        </div>
+        <h3 class="text-2xl text-white mb-3 font-medium tracking-tight">Data Science</h3>
+        <p class="text-[#A1A1AA] text-sm leading-relaxed">
+            Extract insights from complex datasets using Python, SQL, and Machine Learning.
+        </p>
+    </div>
+</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 pb-24 space-y-24">
+        <!-- Spline hero preview -->
+        <section id="how" class="space-y-6 pt-12">
+            <div class="text-center space-y-3">
+                <p class="text-sm uppercase tracking-[0.16em] text-[#52525B]">Live preview</p>
+                <h2 class="text-4xl lg:text-5xl font-semibold tracking-tight text-[#0A0A0A]">See your WebForm stack in motion</h2>
+                <p class="text-lg text-[#4B5563] max-w-3xl mx-auto">
+                    We launch in 7 days with async checkpoints, 3-day updates, and hosting included. Preview the experience before you pick a template.
+                </p>
+            </div>
+            <div class="rounded-3xl border border-[#E4E9E5] bg-white shadow-xl overflow-hidden">
+                <spline-viewer
+                    loading-anim-type="spinner-small-dark"
+                    url="https://prod.spline.design/w-aLrHUI4pNxOgrP/scene.splinecode"
+                    style="width: 100%; min-height: 620px;"
+                ></spline-viewer>
+            </div>
+        </section>
+
+        <!-- Alignment without meetings -->
+        <section class="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div class="space-y-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E4E9E5] text-[#14532D] text-sm font-semibold">
+                    Checkpoint philosophy
+                </div>
+                <h3 class="text-3xl font-semibold tracking-tight text-[#0A0A0A]">Alignment without meetings</h3>
+                <ul class="space-y-3 text-sm text-[#4B5563]">
+                    <li class="flex gap-2">
+                        <span class="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
+                        Layout wireframe → confirm information hierarchy.
+                    </li>
+                    <li class="flex gap-2">
+                        <span class="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
+                        Design direction → approve color, type, and motion.
+                    </li>
+                    <li class="flex gap-2">
+                        <span class="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
+                        Final preview → ship in 7 days, with updates in 3.
+                    </li>
+                </ul>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#18181B] text-white font-semibold hover:bg-[#0F172A] transition">
+                        Start the Website Blueprint
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </a>
+                    <a href="/pricing" class="inline-flex items-center px-4 py-3 rounded-xl border border-[#D4D4D8] text-[#0A0A0A] font-semibold hover:bg-white transition">
+                        See pricing
+                    </a>
+                </div>
+            </div>
+            <div class="rounded-3xl border border-[#E4E9E5] bg-white shadow-lg p-8 space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-[#9EF0A0]/20 flex items-center justify-center text-[#14532D] font-semibold">1</div>
+                    <div>
+                        <p class="text-sm font-semibold text-[#0A0A0A]">Async checkpoints</p>
+                        <p class="text-xs text-[#6B7280]">No meetings unless you want one.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-[#B2A5FE]/20 flex items-center justify-center text-[#4C1D95] font-semibold">2</div>
+                    <div>
+                        <p class="text-sm font-semibold text-[#0A0A0A]">3-day update cycle</p>
+                        <p class="text-xs text-[#6B7280]">Small changes turn around quickly.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-[#FBBF24]/20 flex items-center justify-center text-[#92400E] font-semibold">3</div>
+                    <div>
+                        <p class="text-sm font-semibold text-[#0A0A0A]">Hosting & domain included</p>
+                        <p class="text-xs text-[#6B7280]">All-in-one delivery. No extra setup.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plans -->
+        <section id="plans" class="space-y-8">
+            <div class="space-y-3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E4E9E5] text-[#14532D] text-sm font-semibold">
+                    Plans
+                </div>
+                <h3 class="text-3xl font-semibold text-[#0A0A0A]">Membership, capped at 1,000</h3>
+                <p class="text-[#4B5563]">7-day launch • 3-day updates • Hosting & domain included. Upgrade or pause any time.</p>
+            </div>
+            <div class="grid gap-6 lg:grid-cols-3">
+                <div class="rounded-2xl border border-[#E4E9E5] bg-white p-6 shadow-sm space-y-4">
+                    <div class="text-sm font-semibold text-[#52525B]">Launch</div>
+                    <p class="text-lg font-semibold text-[#0A0A0A]">For new sites and MVPs.</p>
+                    <ul class="space-y-2 text-sm text-[#4B5563]">
+                        <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>7-day delivery after Blueprint</li>
+                        <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>One async checkpoint per stage</li>
+                        <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>Hosting, SSL, analytics</li>
+                    </ul>
+                    <a href="#" class="inline-flex w-full items-center justify-center rounded-xl border border-[#E4E9E5] bg-[#18181B] text-white py-3 font-semibold hover:bg-[#0F172A] transition">Start Launch</a>
+                </div>
+                <div class="rounded-2xl border border-[#0F172A] bg-[#18181B] text-white p-6 shadow-lg space-y-4 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 px-3 py-1 rounded-bl-2xl bg-[#9EF0A0] text-[#0A0A0A] text-xs font-semibold uppercase tracking-wide">Popular</div>
+                    <div class="text-sm font-semibold text-white/80">Growth</div>
+                    <p class="text-lg font-semibold">For teams shipping frequently.</p>
+                    <ul class="space-y-2 text-sm text-white/70">
+                        <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>3-day update cycle</li>
+                        <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>Priority hosting & performance</li>
+                        <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>Template library access</li>
+                    </ul>
+                    <a href="#" class="inline-flex w-full items-center justify-center rounded-xl bg-[#9EF0A0] text-[#0A0A0A] py-3 font-semibold hover:bg-[#8BE08D] transition">Start Growth</a>
+                </div>
+                <div class="rounded-2xl border border-[#E4E9E5] bg-white p-6 shadow-sm space-y-4">
+                    <div class="text-sm font-semibold text-[#52525B]">Scale</div>
+                    <p class="text-lg font-semibold text-[#0A0A0A]">For complex stacks & migrations.</p>
+                    <ul class="space-y-2 text-sm text-[#4B5563]">
+                        <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>Unlimited templates & pages</li>
+                        <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>Dedicated support window</li>
+                        <li class="flex gap-2"><span class="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>Custom integrations & exports</li>
+                    </ul>
+                    <a href="#" class="inline-flex w-full items-center justify-center rounded-xl border border-[#E4E9E5] bg-white text-[#0A0A0A] py-3 font-semibold hover:bg-[#F4F4F5] transition">Talk with us</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Waitlist -->
+        <section class="rounded-3xl border border-[#E4E9E5] bg-white/90 p-8 shadow-lg backdrop-blur">
+            <div class="space-y-3">
+                <h4 class="text-2xl font-semibold text-[#0A0A0A]">Keep your spot — we cap membership at 1,000 for quality.</h4>
+                <p class="text-sm text-[#4B5563]">If the roster is full, join the waitlist and we’ll invite you the moment a slot opens.</p>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-3">
+                <a href="/waitlist" class="inline-flex items-center px-5 py-3 rounded-xl border border-[#D4D4D8] text-[#0A0A0A] font-semibold hover:bg-[#F4F4F5] transition">Join the waitlist</a>
+                <a href="#" class="inline-flex items-center px-5 py-3 rounded-xl bg-[#18181B] text-white font-semibold hover:bg-[#0F172A] transition">Start the Blueprint</a>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="space-y-8">
+            <div class="space-y-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E4E9E5] text-[#14532D] text-sm font-semibold">FAQ</div>
+                <h3 class="text-3xl font-semibold text-[#0A0A0A]">Everything is spelled out</h3>
+                <p class="text-[#4B5563]">No surprises: cancellation, exports, domains, and SLA are baked into the platform.</p>
+            </div>
+            <div class="grid gap-4">
+                <details class="rounded-2xl border border-[#E4E9E5] bg-white p-4">
+                    <summary class="text-sm font-semibold text-[#0A0A0A] cursor-pointer">What happens if I cancel?</summary>
+                    <p class="mt-2 text-sm text-[#4B5563]">Hosting and management stop; your site goes offline. You can export content; a full site export is available as a paid service.</p>
+                </details>
+                <details class="rounded-2xl border border-[#E4E9E5] bg-white p-4">
+                    <summary class="text-sm font-semibold text-[#0A0A0A] cursor-pointer">Do I need meetings?</summary>
+                    <p class="mt-2 text-sm text-[#4B5563]">No meetings required. The Blueprint covers everything; optional async checkpoints are included.</p>
+                </details>
+                <details class="rounded-2xl border border-[#E4E9E5] bg-white p-4">
+                    <summary class="text-sm font-semibold text-[#0A0A0A] cursor-pointer">Turnaround?</summary>
+                    <p class="mt-2 text-sm text-[#4B5563]">First build in 7 days after a complete Blueprint; changes in 3 days, queue-based.</p>
+                </details>
+                <details class="rounded-2xl border border-[#E4E9E5] bg-white p-4">
+                    <summary class="text-sm font-semibold text-[#0A0A0A] cursor-pointer">What counts as a change?</summary>
+                    <p class="mt-2 text-sm text-[#4B5563]">Small updates under ~1 hour. Larger work may require a plan upgrade or scoped add-on.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer class="overflow-hidden text-white bg-[#050505] border-neutral-800 border-t pt-24">
+        <div
+            class="text-center w-full mb-20 pr-4 pl-4"
+            style="mask-image: linear-gradient(180deg, transparent, black 0%, black 55%, transparent); -webkit-mask-image: linear-gradient(180deg, transparent, black 0%, black 55%, transparent);"
+        >
+            <h1
+                class="text-[22vw] leading-[0.7] select-none font-bold text-[#141414] tracking-tighter mix-blend-screen scale-y-110"
+            >
+                WEBFORM
+            </h1>
+        </div>
+        <div class="border-t border-neutral-900 grid grid-cols-1 lg:grid-cols-2">
+            <div class="p-8 md:p-16 grid grid-cols-2 gap-12 border-r border-neutral-900">
+                <div class="flex flex-col gap-6">
+                    <a href="/pricing" class="text-xs font-medium text-neutral-500 uppercase tracking-widest hover:text-white transition-colors">Plans</a>
+                    <a href="/waitlist" class="text-xs font-medium text-neutral-500 uppercase tracking-widest hover:text-white transition-colors">Waitlist</a>
+                    <a href="#" class="text-xs font-medium text-neutral-500 uppercase tracking-widest hover:text-white transition-colors">Blueprint</a>
+                </div>
+                <div class="flex flex-col gap-6">
+                    <a href="#" class="text-xs font-medium text-neutral-500 uppercase tracking-widest hover:text-white transition-colors">About</a>
+                    <a href="#" class="text-xs font-medium text-neutral-500 uppercase tracking-widest hover:text-white transition-colors">Support</a>
+                    <a href="#" class="text-xs font-medium text-neutral-500 uppercase tracking-widest hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="text-xs font-medium text-neutral-500 uppercase tracking-widest hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+            <div class="lg:h-auto lg:border-t-0 flex overflow-hidden w-full h-48 border-neutral-900 border-t relative items-center justify-center">
+                <div class="flex items-center justify-center opacity-20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" class="text-white" aria-hidden="true" role="img">
+                        <path fill="currentColor" d="m13.792 21.319l-.597 1.008c-.531.897-1.859.897-2.39 0l-.597-1.008c-.462-.781-.693-1.172-1.065-1.388c-.371-.216-.84-.224-1.774-.24c-1.381-.024-2.247-.109-2.974-.41a5.5 5.5 0 0 1-2.976-2.976C1 15.294 1 14.013 1 11.45v-1.1c0-3.6 0-5.401.81-6.724A5.5 5.5 0 0 1 3.626 1.81C4.95 1 6.75 1 10.35 1h3.3c3.6 0 5.401 0 6.724.81a5.5 5.5 0 0 1 1.816 1.816C23 4.95 23 6.75 23 10.35v1.1c0 2.563 0 3.844-.419 4.855a5.5 5.5 0 0 1-2.976 2.976c-.727.301-1.593.386-2.974.41c-.935.016-1.403.024-1.774.24c-.372.216-.603.607-1.065 1.388" opacity=".5"></path>
+                        <path fill="currentColor" fill-rule="evenodd" d="M15.267 6.83a.825.825 0 0 1 1.167 0l.188.188l.04.04c.7.7 1.283 1.282 1.683 1.807c.423.554.72 1.14.72 1.848s-.297 1.294-.72 1.848c-.4.524-.983 1.107-1.682 1.806l-.23.23a.825.825 0 0 1-1.166-1.167l.189-.19c.75-.749 1.252-1.254 1.577-1.68c.31-.407.381-.644.381-.847s-.07-.44-.38-.847c-.326-.426-.828-.931-1.578-1.681l-.189-.189a.825.825 0 0 1 0-1.166m-1.63-2.226c.44.118.701.57.583 1.01L11.373 16.24a.825.825 0 1 1-1.594-.427l2.847-10.625a.825.825 0 0 1 1.01-.584M8.733 6.83a.825.825 0 0 0-1.167 0l-.188.188l-.04.04c-.7.7-1.283 1.282-1.683 1.807c-.423.554-.72 1.14-.72 1.848s.297 1.294.72 1.848c.4.524.983 1.107 1.682 1.806l.23.23a.825.825 0 0 0 1.166-1.167l-.189-.19c-.75-.749-1.252-1.254-1.577-1.68c-.31-.407-.381-.644-.381-.847s.07-.44.38-.847c.326-.426.828-.931 1.578-1.681l.189-.189a.825.825 0 0 0 0-1.166" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto mt-8 border-t border-neutral-900 pt-4 px-8 text-sm text-neutral-500 text-center pb-8">
+            © 2024 WebForm. All rights reserved.
+        </div>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.3/build/spline-viewer.js"></script>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        }
+    </script>
+
+</body></html>

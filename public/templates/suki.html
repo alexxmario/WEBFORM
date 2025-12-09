@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarah - Model Portfolio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+.invisible { visibility: hidden !important; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; background-color: #000000; }
+.font-serif-italic { font-family: 'Playfair Display', serif; font-style: italic; }
+html { scroll-behavior: smooth; }
+::-webkit-scrollbar { width: 0px; background: transparent; }
+@keyframes fadeInUpBlur {
+0% { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.reveal-item { opacity: 0; animation-fill-mode: both; }
+.reveal-item.is-visible { animation: fadeInUpBlur 1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
+.spotlight-group { position: relative; overflow: hidden; --mouse-x: 0px; --mouse-y: 0px; }
+.spotlight-group::before {
+content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: inherit; padding: 1px;
+background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.4), transparent 40%);
+-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+-webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity 0.5s ease;
+pointer-events: none; z-index: 20;
+}
+.spotlight-group::after {
+content: ""; position: absolute; inset: 0; border-radius: inherit;
+background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.05), transparent 40%);
+opacity: 0; transition: opacity 0.5s ease; pointer-events: none; z-index: 1;
+}
+.spotlight-group:hover::before, .spotlight-group:hover::after { opacity: 1; }
+.spotlight-content { position: relative; z-index: 10; }
+</style>
+<link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap"><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&display=swap"><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&display=swap"><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap"><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap"><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&display=swap"><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap"><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&display=swap"><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap"><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style><style id="border-gradient-shared-style">
+[style*="--border-gradient"]::before {
+content: "";
+position: absolute;
+inset: 0;
+padding: 1px;
+border-radius: var(--border-radius-before, inherit);
+-webkit-mask: linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+-webkit-mask-composite: xor;
+mask-composite: exclude;
+background: var(--border-gradient);
+pointer-events: none;
+}
+</style></head>
+  <body class="min-h-screen flex flex-col items-center gap-6 selection:bg-cyan-500/30 md:p-6 text-white pt-4 pr-4 pb-4 pl-4">
+
+    <!-- HERO SECTION -->
+    <section class="spotlight-group overflow-hidden group reveal-item bg-gray-900 w-full h-[800px] max-w-[1500px] ring-white/5 ring-1 rounded-[32px] relative shadow-2xl is-visible" style="--mouse-x: 838px; --mouse-y: 4px;">
+  <div class="z-0 absolute top-0 right-0 bottom-0 left-0">
+    <div class="bg-gradient-to-br from-indigo-500/10 via-purple-500/5 opacity-30 absolute top-0 right-0 bottom-0 left-0 to-blue-500/10"></div>
+    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/6cc57394-5081-450f-b228-64acb9eb7536_3840w.png" alt="Background" class="transition-transform duration-[2000ms] group-hover:scale-105 opacity-60 w-full h-full object-cover" style="mask-image: linear-gradient(transparent, black 25%, black 100%, transparent);">
+    <div class="bg-gradient-to-t from-[#0f0f11] via-[#0f0f11]/40 to-transparent absolute top-0 right-0 bottom-0 left-0">
+    </div>
+  </div>
+
+  <nav class="spotlight-content z-20 flex md:px-10 md:py-8 reveal-item delay-100 text-sm font-medium tracking-wide w-full pt-6 pr-6 pb-6 pl-6 absolute top-0 left-0 items-center justify-between is-visible">
+    <div class="flex items-center">
+      <a href="#" class="inline-flex items-center justify-center bg-center w-[80px] h-[50px] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/579d434c-5e5e-4e56-98d5-3a26b10de9db_320w.png)] bg-cover rounded"></a>
+      <div class="hidden md:flex items-center gap-8 text-gray-400">
+        <a href="#work" class="hover:text-white transition-colors">Portfolio</a>
+        <a href="#about" class="hover:text-white transition-colors">Bio</a>
+        <a href="#expertise" class="hover:text-white transition-colors">Services</a>
+      </div>
+    </div>
+    <button class="group inline-flex overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_-10px_rgba(59,130,246,0.5)] focus:outline-none sm:w-auto text-sm font-medium text-white w-full h-[54px] rounded-full pt-4 pr-8 pb-4 pl-8 relative items-center justify-center" style="position: relative; --border-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2)); --border-radius-before: 9999px">
+          <style>
+            @keyframes beam-spin { to { transform: rotate(360deg); } }
+            @keyframes lines-slide {
+                0% { background-position: 0 0; }
+                100% { background-position: 24px 0; }
+            }
+          </style>
+
+          <div class="absolute inset-0 -z-20 rounded-full overflow-hidden p-[1px]">
+            <div class="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0_300deg,#3b82f6_360deg)]" style="animation: beam-spin 3s linear infinite;"></div>
+            <div class="absolute inset-[1px] rounded-full bg-[#050505]"></div>
+          </div>
+
+          <div class="overflow-hidden bg-[#0A0A0A] rounded-full absolute top-[2px] right-[2px] bottom-[2px] left-[2px]">
+            <div class="bg-gradient-to-b from-blue-900/20 to-transparent absolute top-0 right-0 bottom-0 left-0"></div>
+            <div class="opacity-[0.07] mix-blend-plus-lighter absolute top-0 right-0 bottom-0 left-0" style="background-image: repeating-linear-gradient(90deg, #fff, #fff 1px, transparent 1px, transparent 8px);  background-size: 24px 100%;  animation: lines-slide 1.5s linear infinite;"></div>
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-1/2 bg-blue-500/20 blur-2xl rounded-full pointer-events-none transition-colors duration-500 group-hover:bg-blue-500/40"></div>
+          </div>
+
+          <span class="transition-colors group-hover:text-white uppercase font-semibold text-white/90 tracking-tight z-10 relative">Book Suki</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right relative z-10 ml-2 transition-transform duration-300 group-hover:translate-x-1">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+    </button>
+  </nav>
+
+  <div class="spotlight-content md:p-12 lg:p-16 flex flex-col lg:flex-row w-full pt-6 pr-6 pb-6 pl-6 absolute bottom-0 left-0 gap-x-12 gap-y-12 items-end justify-between">
+    <div class="max-w-4xl z-10">
+      <h1 class="reveal-item delay-200 md:text-7xl lg:text-8xl xl:text-9xl leading-[0.9] text-6xl font-medium text-white tracking-tighter mb-8 is-visible">
+        Suki <span class="block md:inline font-normal text-gray-400 font-serif-italic">Kimura</span></h1>
+      <p class="reveal-item delay-300 leading-relaxed md:text-base text-lg font-light text-gray-400 max-w-lg is-visible">
+        Professional fashion, runway, and commercial model based in New York. Bringing elegance, versatility, and energy to every frame.
+      </p>
+    </div>
+  </div>
+
+  <div class="z-10 md:p-12 lg:p-16 flex flex-col pt-6 pr-6 pb-6 pl-6 absolute right-0 bottom-0 items-end">
+
+  <div class="flex gap-x-8 gap-y-4 items-center">
+
+
+    <a href="#" class="group relative flex h-[45px] w-[45px] cursor-pointer items-center justify-center rounded-[7px] border-none bg-transparent transition-all duration-300 hover:scale-105">
+      <span class="z-20 flex h-full w-full items-center justify-center rounded-[10px] border border-[rgba(156,156,156,0.466)] bg-transparent backdrop-blur-[4px] tracking-[0.8px] transition-all duration-300 group-hover:bg-[rgba(156,156,156,0.466)]">
+    <svg fill="white" viewBox="0 0 448 512" height="1.5em" xmlns="http://www.w3.org/2000/svg" class="fill-white h-[1.5em]">
+      <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8z" class=""></path>
+    </svg>
+  </span>
+      <span class="absolute -z-10 h-full w-full origin-bottom rotate-0 rounded-[10px] bg-[linear-gradient(45deg,#f09433_0%,#e6683c_25%,#dc2743_50%,#cc2366_75%,#bc1888_100%)] transition-all duration-300 group-hover:rotate-[35deg]"></span>
+    </a>
+
+    <a href="#" class="group flex cursor-pointer items-center justify-center border-none transition-all duration-300 hover:scale-105 bg-transparent w-[45px] h-[45px] z-20 rounded-[7px] relative">
+      <span class="z-20 flex items-center justify-center backdrop-blur-[0px] transition-all duration-300 group-hover:bg-[rgba(156,156,156,0.466)] group-hover:backdrop-blur-[4px] tracking-[0.8px] bg-transparent w-full h-full border-[rgba(156,156,156,0.466)] border rounded-[10px]">
+    <svg viewBox="0 0 512 512" height="1.7em" xmlns="http://www.w3.org/2000/svg" class="fill-white h-[1.7em]">
+      <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class=""></path>
+    </svg>
+  </span>
+      <span class="absolute -z-10 h-full w-full origin-bottom rotate-0 rounded-[10px] bg-[#444448] transition-all duration-300 group-hover:rotate-[35deg]"></span>
+    </a>
+
+    <a href="#" class="group relative flex h-[45px] w-[45px] cursor-pointer items-center justify-center rounded-[7px] border-none bg-transparent transition-all duration-300 hover:scale-105">
+      <span class="z-20 flex items-center justify-center backdrop-blur-[0px] transition-all duration-300 group-hover:border-[rgba(216,216,216,0.466)] group-hover:bg-[rgba(190,190,190,0.466)] group-hover:backdrop-blur-[4px] tracking-[0.8px] bg-transparent w-full h-full border-[rgba(156,156,156,0.466)] border rounded-[10px] relative">
+      <svg viewBox="0 0 448 512" height="1.6em" xmlns="http://www.w3.org/2000/svg" class="fill-white h-[1.6em]">
+        <path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z" class=""></path>
+      </svg>
+    </span>
+      <span class="absolute -z-10 h-full w-full origin-bottom rotate-0 rounded-[10px] bg-[#0077b5] transition-all duration-300 group-hover:rotate-[35deg]"></span>
+    </a>
+  </div>
+</div>
+</section>
+
+    <!-- FEATURED PROJECTS -->
+    <section class="spotlight-group overflow-hidden md:p-16 bg-gradient-to-br from-white/10 via-white/0 to-white/10 from-white/20 to-white/20 w-full h-[1200px] max-w-[1500px] rounded-[32px] ring-0 pt-8 pr-8 pb-8 pl-8 relative reveal-item" id="work">
+  <div class="spotlight-content grid grid-cols-1 md:grid-cols-2 mb-16 pb-8">
+    <div class="col-span-1 reveal-item">
+      <h1 class="leading-[0.9] md:text-7xl lg:text-8xl xl:text-8xl text-6xl font-medium text-white tracking-tighter mb-8">
+        Featured <span class="block md:inline font-normal text-gray-400 font-serif-italic">Work</span></h1>
+      <div class="text-white text-sm font-light mt-4 opacity-50">
+        // PROJECTS & CASE STUDIES
+      </div>
+    </div>
+
+    <div class="col-span-1 self-end md:text-right mt-8 md:mt-0 reveal-item delay-200">
+      <span class="text-sm font-medium tracking-widest uppercase mb-1 block text-blue-400">
+        01
+      </span>
+      <p class="text-white/70 max-w-sm ml-auto text-lg font-light">
+        A curated collection of my most impactful and innovative creative projects.
+      </p>
+    </div>
+  </div>
+
+  <div class="spotlight-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8 items-stretch">
+    <!-- Card 1 -->
+    <div class="spotlight-group group cursor-pointer transition-all duration-500 lg:hover:translate-y-[-10px] h-full flex flex-col rounded-[22px] p-2 bg-white/5 reveal-item delay-100">
+      <div class="spotlight-content transition-all duration-300 flex flex-col h-full">
+        <div class="h-[260px] md:h-[320px] overflow-hidden w-full rounded-[18px] mb-4 relative">
+          <div class="group-hover:bg-transparent transition-colors bg-black/20 z-20 absolute inset-0 pointer-events-none"></div>
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e3d61db3-fc8d-4ce9-8453-5093563afc5c_1600w.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 relative z-0" alt="Project 1">
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/701df31a-c515-4c85-b9ef-cfd4c2dffecd_1600w.webp" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-105 z-10" alt="Project 1 Hover">
+        </div>
+        <div class="flex justify-between items-start px-2 pb-2">
+          <div>
+            <h3 class="text-xl font-medium text-white mb-1 transition-colors group-hover:text-blue-400">
+              Vogue Editorial
+            </h3>
+            <p class="text-gray-500 text-sm">Fashion • 2024</p>
+          </div>
+          <div class="flex gap-2">
+            <span class="px-2 py-0.5 rounded-full border border-white/10 text-[10px] uppercase tracking-wider text-gray-400">
+              Print
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="spotlight-group group cursor-pointer lg:-mt-8 lg:mb-4 transition-all duration-500 lg:hover:translate-y-[-10px] h-full flex flex-col rounded-[22px] p-2 bg-white/5 reveal-item delay-200">
+      <div class="spotlight-content transition-all duration-300 flex flex-col h-full">
+        <div class="w-full h-[260px] md:h-[320px] rounded-[18px] overflow-hidden relative mb-4">
+          <div class="group-hover:bg-transparent transition-colors bg-black/20 z-20 absolute top-0 right-0 bottom-0 left-0 pointer-events-none"></div>
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7cb5b994-b7c5-44d5-975f-f63e4a780d45_1600w.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 relative z-0" alt="Project 2">
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/cf6ef5a0-4049-48d1-a3ab-186aa8a0ab73_1600w.webp" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-105 z-10" alt="Project 2 Hover">
+        </div>
+        <div class="flex justify-between items-start px-2 pb-2">
+          <div class="">
+            <h3 class="text-xl font-medium text-white mb-1 transition-colors group-hover:text-blue-400">
+              Paris Fashion Week
+            </h3>
+            <p class="text-gray-500 text-sm">Runway • 2023</p>
+          </div>
+          <div class="flex gap-2">
+            <span class="px-2 py-0.5 rounded-full border border-white/10 text-[10px] uppercase tracking-wider text-gray-400">
+              Walk
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="spotlight-group group cursor-pointer transition-all duration-500 lg:hover:translate-y-[-10px] h-full flex flex-col rounded-[22px] p-2 bg-white/5 reveal-item delay-300">
+      <div class="spotlight-content transition-all duration-300 flex flex-col h-full">
+        <div class="w-full h-[260px] md:h-[320px] rounded-[18px] overflow-hidden relative mb-4">
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-20 pointer-events-none"></div>
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4eca907a-2a81-4567-881c-c9ffb18568fb_1600w.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 relative z-0" alt="Project 3">
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/13e56bf0-b0d7-4495-94e5-5def94d81791_1600w.webp" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-105 z-10" alt="Project 3 Hover">
+        </div>
+        <div class="flex justify-between items-start px-2 pb-2">
+          <div class="">
+            <h3 class="text-xl font-medium text-white mb-1 transition-colors group-hover:text-blue-400">
+              Zara Collection
+            </h3>
+            <p class="text-gray-500 text-sm">Commercial • 2023</p>
+          </div>
+          <div class="flex gap-2">
+            <span class="px-2 py-0.5 rounded-full border border-white/10 text-[10px] uppercase tracking-wider text-gray-400">
+              Retail
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="spotlight-group group cursor-pointer transition-all duration-500 lg:hover:translate-y-[-10px] h-full flex flex-col rounded-[22px] p-2 bg-white/5 reveal-item delay-100">
+      <div class="spotlight-content transition-all duration-300 flex flex-col h-full">
+        <div class="w-full h-[260px] md:h-[320px] rounded-[18px] overflow-hidden relative mb-4">
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-20 pointer-events-none"></div>
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/6fd253c9-179a-4d42-afc9-6a8afe2dbd6f_1600w.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 relative z-0" alt="Project 4">
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/92cff667-f259-4342-a0aa-f51b804f4d5c_1600w.webp" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-105 z-10" alt="Project 4 Hover">
+        </div>
+        <div class="flex justify-between items-start px-2 pb-2">
+          <div>
+            <h3 class="text-xl font-medium text-white mb-1 transition-colors group-hover:text-blue-400">
+              Sephora Beauty
+            </h3>
+            <p class="text-gray-500 text-sm">Campaign • 2024</p>
+          </div>
+          <div class="flex gap-2">
+            <span class="px-2 py-0.5 rounded-full border border-white/10 text-[10px] uppercase tracking-wider text-gray-400">
+              Beauty
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="spotlight-group group cursor-pointer lg:-mt-8 transition-all duration-500 lg:hover:translate-y-[-10px] h-full flex flex-col rounded-[22px] p-2 bg-white/5 reveal-item delay-200">
+      <div class="spotlight-content transition-all duration-300 flex flex-col h-full">
+        <div class="w-full h-[260px] md:h-[320px] rounded-[18px] overflow-hidden relative mb-4">
+          <div class="group-hover:bg-transparent transition-colors z-20 bg-black/20 absolute top-0 right-0 bottom-0 left-0 pointer-events-none"></div>
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4dbba718-e4cd-4922-b903-62a7d30c1572_1600w.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 relative z-0" alt="Project 5">
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/f0cc2f34-bd10-4618-883f-33d5ffb7c3cf_1600w.webp" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-105 z-10" alt="Project 5 Hover">
+        </div>
+        <div class="flex justify-between items-start px-2 pb-2">
+          <div class="">
+            <h3 class="text-xl font-medium text-white mb-1 transition-colors group-hover:text-blue-400">
+              Elle Magazine
+            </h3>
+            <p class="text-gray-500 text-sm">Editorial • 2023</p>
+          </div>
+          <div class="flex gap-2">
+            <span class="px-2 py-0.5 rounded-full border border-white/10 text-[10px] uppercase tracking-wider text-gray-400">
+              Cover
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="spotlight-group group cursor-pointer transition-all duration-500 lg:hover:translate-y-[-10px] h-full flex flex-col rounded-[22px] p-2 bg-white/5 reveal-item delay-300">
+      <div class="spotlight-content transition-all duration-300 flex flex-col h-full">
+        <div class="w-full h-[260px] md:h-[320px] rounded-[18px] overflow-hidden relative mb-4">
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-20 pointer-events-none"></div>
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/483ecda8-47be-4bbe-a327-2672a412811f_1600w.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 relative z-0" alt="Project 6">
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e1086346-2938-4365-a7f0-0d927bdcfb96_1600w.jpg" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-105 z-10" alt="Project 6 Hover">
+        </div>
+        <div class="flex justify-between items-start px-2 pb-2">
+          <div>
+            <h3 class="text-xl font-medium text-white mb-1 transition-colors group-hover:text-blue-400">
+              Nike Sport
+            </h3>
+            <p class="text-gray-500 text-sm">Lifestyle • 2024</p>
+          </div>
+          <div class="flex gap-2">
+            <span class="px-2 py-0.5 rounded-full border border-white/10 text-[10px] uppercase tracking-wider text-gray-400">
+              Fitness
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="spotlight-group overflow-hidden bg-gradient-to-br from-white/10 via-white/0 to-white/10 w-full max-w-[1500px] rounded-[32px] ring-0 relative reveal-item">
+      <div class="spotlight-content overflow-hidden md:p-16 w-full max-w-[1500px] rounded-[32px] ring-white/5 ring-1 pt-8 pr-8 pb-8 pl-8 relative" id="about-me">
+        <div class="grid grid-cols-1 md:grid-cols-2 mb-16 pb-8">
+          <div class="col-span-1 reveal-item">
+            <h1 class="leading-[0.9] md:text-7xl xl:text-8xl lg:text-7xl text-6xl font-medium text-white tracking-tighter mb-8">About <span class="block md:inline font-normal text-gray-400 font-serif-italic">Suki</span></h1>
+            <div class="text-white text-sm font-light mt-4 opacity-50">
+              // INTRO & PHILOSOPHY
+            </div>
+          </div>
+
+          <div class="col-span-1 self-end md:text-right mt-8 md:mt-0 reveal-item delay-200">
+            <span class="uppercase block text-sm font-medium tracking-widest mb-1 text-blue-400">02</span>
+            <p class="text-white/70 max-w-sm ml-auto text-lg font-light">
+              Model, muse, and visual storyteller. A glimpse into my journey and professional background.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:p-8 md:grid-cols-3 md:gap-16 bg-gradient-to-br from-black/10 to-black/0 rounded-3xl pt-4 pr-4 pb-4 pl-4 gap-x-8 gap-y-8 reveal-item delay-200">
+          <div class="min-h-[400px] lg:min-h-[600px] overflow-hidden w-full rounded-3xl relative">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e95bbfe6-01df-4204-9400-aaa01d8b6a3f_1600w.png" alt="Portrait" class="transition-all duration-700 w-full h-full object-cover absolute top-0 right-0 bottom-0 left-0">
+            <div class="absolute bottom-8 left-8">
+              <div class="bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-2xl w-64">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                  <span class="text-xs font-medium text-white">Available for work</span>
+                </div>
+                <p class="text-xs text-gray-300 leading-relaxed">
+                  Currently based in San Francisco, working with clients globally.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-span-1 md:col-span-2">
+            <h3 class="text-3xl md:text-5xl font-medium text-white mb-8 leading-tight reveal-item delay-100">
+              I combine natural presence with professional discipline.
+            </h3>
+
+            <div class="space-y-6 text-gray-400 text-lg font-light leading-relaxed mb-10 reveal-item delay-200">
+              <p>I'm a professional model working with top agencies and brands worldwide.</p>
+              <p>My approach is deeply rooted in expression, bringing a unique energy to every shoot. Whether on the runway or in front of the lens, I strive to embody the designer's vision.</p>
+              <p>My philosophy is simple: versatility is key. From high fashion to commercial lifestyle, I adapt to tell the story through movement and expression.</p>
+            </div>
+
+            <div class="grid grid-cols-3 gap-8 border-t border-white/5 pt-8 reveal-item delay-300">
+              <div>
+                <span class="block text-4xl font-extrabold text-white mb-1">5'10"</span>
+                <span class="text-sm text-gray-500 uppercase tracking-wider">Height</span>
+              </div>
+              <div>
+                <span class="block text-4xl font-extrabold text-white mb-1">34-24-35</span>
+                <span class="text-sm text-gray-500 uppercase tracking-wider">Measurements</span>
+              </div>
+              <div>
+                <span class="block text-4xl font-extrabold text-white mb-1">Black</span>
+                <span class="text-sm text-gray-500 uppercase tracking-wider">Eyes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERTISE / SKILLS -->
+    <section class="spotlight-group overflow-hidden md:p-16 bg-gradient-to-br from-white/10 via-white/0 to-white/10 w-full max-w-[1500px] rounded-[32px] ring-0 pt-8 pr-8 pb-8 pl-8 relative reveal-item" id="experience">
+      <div class="spotlight-content grid grid-cols-1 md:grid-cols-2 mb-16 pb-8">
+        <div class="col-span-1 reveal-item">
+          <h1 class="leading-[0.9] md:text-7xl xl:text-8xl lg:text-7xl text-5xl font-medium text-white tracking-tighter mb-8">
+            Agency <span class="block md:inline font-normal text-gray-400 font-serif-italic">Experience</span>
+          </h1>
+          <div class="text-white text-sm font-light mt-4 opacity-50">
+            // SKILLS & TIMELINE
+          </div>
+        </div>
+
+        <div class="col-span-1 self-end md:text-right mt-8 md:mt-0 reveal-item delay-200">
+          <span class="uppercase block text-sm font-medium tracking-widest mb-1 text-blue-400">03</span>
+          <p class="text-white/70 max-w-sm ml-auto text-lg font-light">
+            A timeline of my agency representation and key career milestones.
+          </p>
+        </div>
+      </div>
+
+      <div class="spotlight-content md:px-6 flex md:justify-around text-[10px] md:text-xs uppercase sticky z-20 font-bold text-black tracking-widest bg-white w-full mb-0 pt-3 pr-4 pb-3 pl-4 top-0 items-center justify-between rounded-lg reveal-item delay-300">
+        <span class="cursor-pointer hover:opacity-60 transition-opacity">Representation</span>
+        <span class="cursor-pointer hover:opacity-60 transition-opacity hidden md:block">Freelance Projects</span>
+        <span class="cursor-pointer hover:opacity-60 transition-opacity">Location</span>
+        <span class="cursor-pointer hover:opacity-60 transition-opacity hidden md:block">International</span>
+      </div>
+
+      <div class="spotlight-content flex flex-col w-full mt-4">
+        <!-- List Items -->
+        <div class="group relative py-6 md:py-8 border-b border-white/10 hover:bg-white/5 transition-colors cursor-pointer reveal-item delay-100">
+          <div class="flex flex-col md:grid md:grid-cols-[25%_20%_35%_20%] md:items-center justify-between gap-2 px-2 md:px-4">
+            <div class="w-full">
+              <h3 class="text-xl md:text-2xl font-medium text-white transition-colors group-hover:text-blue-400">Elite Model Mgmt</h3>
+            </div>
+            <div class="w-full">
+              <span class="text-sm md:text-base text-gray-500 font-mono group-hover:text-white transition-colors">2022 - Present</span>
+            </div>
+            <div class="w-full">
+              <span class="text-base md:text-lg text-gray-300 group-hover:text-white transition-colors">Signed Model</span>
+            </div>
+            <div class="w-full text-left md:text-right">
+              <span class="text-sm md:text-base text-gray-500 uppercase tracking-wider transition-colors group-hover:text-blue-400">New York, USA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="group relative py-6 md:py-8 border-b border-white/10 hover:bg-white/5 transition-colors cursor-pointer reveal-item delay-200">
+          <div class="flex flex-col md:grid md:grid-cols-[25%_20%_35%_20%] md:items-center justify-between gap-2 px-2 md:px-4">
+            <div class="w-full">
+              <h3 class="text-xl md:text-2xl font-medium text-white transition-colors group-hover:text-blue-400">IMG London</h3>
+            </div>
+            <div class="w-full">
+              <span class="text-sm md:text-base text-gray-500 font-mono group-hover:text-white transition-colors">2020 - 2022</span>
+            </div>
+            <div class="w-full">
+              <span class="text-base md:text-lg text-gray-300 group-hover:text-white transition-colors">Development Board</span>
+            </div>
+            <div class="w-full text-left md:text-right">
+              <span class="text-sm md:text-base text-gray-500 uppercase tracking-wider transition-colors group-hover:text-blue-400">London, UK</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="group relative py-6 md:py-8 border-b border-white/10 hover:bg-white/5 transition-colors cursor-pointer reveal-item delay-300">
+          <div class="flex flex-col md:grid md:grid-cols-[25%_20%_35%_20%] md:items-center justify-between gap-2 px-2 md:px-4">
+            <div class="w-full">
+              <h3 class="text-xl md:text-2xl font-medium text-white transition-colors group-hover:text-blue-400">Ford Models</h3>
+            </div>
+            <div class="w-full">
+              <span class="text-sm md:text-base text-gray-500 font-mono group-hover:text-white transition-colors">2018 - 2020</span>
+            </div>
+            <div class="w-full">
+              <span class="text-base md:text-lg text-gray-300 group-hover:text-white transition-colors">Runway Division</span>
+            </div>
+            <div class="w-full text-left md:text-right">
+              <span class="text-sm md:text-base text-gray-500 uppercase tracking-wider transition-colors group-hover:text-blue-400">Paris, France</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="group relative py-6 md:py-8 border-b border-white/10 hover:bg-white/5 transition-colors cursor-pointer reveal-item delay-100">
+          <div class="flex flex-col md:grid md:grid-cols-[25%_20%_35%_20%] md:items-center justify-between gap-2 px-2 md:px-4">
+            <div class="w-full">
+              <h3 class="text-xl md:text-2xl font-medium text-white transition-colors group-hover:text-blue-400">Freelance</h3>
+            </div>
+            <div class="w-full">
+              <span class="text-sm md:text-base text-gray-500 font-mono group-hover:text-white transition-colors">2016 - 2018</span>
+            </div>
+            <div class="w-full">
+              <span class="text-base md:text-lg text-gray-300 group-hover:text-white transition-colors">Commercial Talent</span>
+            </div>
+            <div class="w-full text-left md:text-right">
+              <span class="text-sm md:text-base text-gray-500 uppercase tracking-wider transition-colors group-hover:text-blue-400">Miami, USA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="group relative py-6 md:py-8 border-b border-white/10 hover:bg-white/5 transition-colors cursor-pointer reveal-item delay-200">
+          <div class="flex flex-col md:grid md:grid-cols-[25%_20%_35%_20%] md:items-center justify-between gap-2 px-2 md:px-4">
+            <div class="w-full">
+              <h3 class="text-xl md:text-2xl font-medium text-white transition-colors group-hover:text-blue-400">Scouted</h3>
+            </div>
+            <div class="w-full">
+              <span class="text-sm md:text-base text-gray-500 font-mono group-hover:text-white transition-colors">2014 - 2016</span>
+            </div>
+            <div class="w-full">
+              <span class="text-base md:text-lg text-gray-300 group-hover:text-white transition-colors">New Face</span>
+            </div>
+            <div class="w-full text-left md:text-right">
+              <span class="text-sm md:text-base text-gray-500 uppercase tracking-wider transition-colors group-hover:text-blue-400">Chicago, USA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="spotlight-group md:p-20 overflow-hidden flex flex-col text-center bg-gradient-to-br from-white/10 to-white/0 w-full max-w-[1500px] ring-white/5 ring-1 rounded-[32px] pt-8 pr-8 pb-8 pl-8 relative items-center reveal-item" id="contact">
+      <div class="absolute inset-0 z-0">
+        <div class="spline-container absolute top-0 left-0 w-full h-full z-0"><iframe src="https://my.spline.design/glowingplanetparticles-HmCVKutonlFn3Oqqe6DI9nWi/" frameborder="0" width="100%" height="100%" class=""></iframe></div>
+      </div>
+      
+      <div class="spotlight-content relative z-10 max-w-2xl reveal-item delay-100">
+        <h2 class="text-5xl md:text-7xl font-medium text-white mb-8 tracking-tight">
+          Let's work
+          <br>
+          <span class="text-gray-500 font-serif-italic">together.</span>
+        </h2>
+        <p class="text-gray-400 text-lg mb-10">
+          Have a project in mind? Let's create something extraordinary.
+        </p>
+
+        <a href="mailto:bookings@sarahwilliams.com" class="inline-flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full text-lg font-medium hover:scale-105 transition-transform duration-300 mb-20">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" class="lucide lucide-mail w-5 h-5"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+          bookings@sarahwilliams.com
+        </a>
+
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8 border-t border-white/5 pt-10 w-full md:w-[800px]">
+          <div class="flex gap-6">
+            <a href="#" class="text-gray-500 hover:text-white transition-colors">Twitter</a>
+            <a href="#" class="text-gray-500 hover:text-white transition-colors">LinkedIn</a>
+            <a href="#" class="text-gray-500 hover:text-white transition-colors">Instagram</a>
+            <a href="#" class="text-gray-500 hover:text-white transition-colors">Dribbble</a>
+          </div>
+          <p class="text-gray-600 text-sm">
+            © 2024 Portfolio. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      lucide.createIcons();
+
+      // Intersection Observer for Animations
+      const observerOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.reveal-item').forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Flashlight / Spotlight Effect Logic
+      document.querySelectorAll('.spotlight-group').forEach(group => {
+        group.addEventListener('mousemove', (e) => {
+          const rect = group.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          group.style.setProperty('--mouse-x', `${x}px`);
+          group.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    </script>
+  
+</body></html>
