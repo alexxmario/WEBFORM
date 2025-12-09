@@ -169,13 +169,20 @@ export default function ChatPage() {
 
       if (data) {
         console.log("Loaded messages:", data.length);
-        const mapped: Message[] = data.map((m) => ({
-          id: String(m.id),
-          content: String(m.content),
-          created_at: String(m.created_at),
-          sender_id: String(m.sender_id),
-          sender_email: Array.isArray(m.profiles) ? m.profiles[0]?.email : m.profiles?.email,
-        }));
+        const mapped: Message[] = data.map((m) => {
+          const profiles = m.profiles as unknown;
+          const email = Array.isArray(profiles)
+            ? (profiles[0] as { email?: string })?.email
+            : (profiles as { email?: string })?.email;
+
+          return {
+            id: String(m.id),
+            content: String(m.content),
+            created_at: String(m.created_at),
+            sender_id: String(m.sender_id),
+            sender_email: email,
+          };
+        });
         setMessages(mapped);
       }
     } catch (error) {
