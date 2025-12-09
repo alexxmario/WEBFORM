@@ -121,7 +121,8 @@ export default function ChatPage() {
       console.log("Unsubscribing from room:", roomId);
       channel.unsubscribe();
     };
-  }, [roomId, supabase, loadMessages]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [roomId, supabase]);
 
   const initRoom = async (userId: string, userEmail: string) => {
     try {
