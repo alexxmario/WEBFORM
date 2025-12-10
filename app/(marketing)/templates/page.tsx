@@ -67,7 +67,7 @@ export default function TemplatesPage() {
         <div className="sticky bottom-4 z-20">
           <div className="glass flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border/70 px-4 py-3 shadow-lg">
             <p className="text-sm text-muted-foreground">
-              Ready to start? Fill the Website Blueprint and we'll customize any template for you.
+              Ready to start? Fill the Website Blueprint and we&apos;ll customize any template for you.
             </p>
             <BlueprintButton>Start the Website Blueprint</BlueprintButton>
           </div>
