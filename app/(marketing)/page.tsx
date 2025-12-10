@@ -64,9 +64,6 @@ export default function HomePage() {
           }}
         />
         <section className="mission-section container max-w-5xl space-y-6 text-center" id="mission-section">
-          <div className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            [ Teams we’ve partnered with ]
-          </div>
           <h2 className="text-3xl md:text-4xl font-semibold leading-tight text-foreground">
             We’re designers and engineers who build, host, and update your site without meetings. We ship in days,
             manage the stack end-to-end, and surface only the decisions you need —
