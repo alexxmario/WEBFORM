@@ -10,12 +10,13 @@ type InitRequest = {
 };
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as InitRequest;
-  if (!body?.userId || !body?.email) {
-    return NextResponse.json({ error: "Missing userId or email" }, { status: 400 });
-  }
+  try {
+    const body = (await request.json()) as InitRequest;
+    if (!body?.userId || !body?.email) {
+      return NextResponse.json({ error: "Missing userId or email" }, { status: 400 });
+    }
 
-  const supabase = supabaseServerAdmin();
+    const supabase = supabaseServerAdmin();
   const adminEmails = (process.env.ADMIN_EMAILS || "")
     .split(",")
     .map((e) => e.trim().toLowerCase())
@@ -81,5 +82,12 @@ export async function POST(request: Request) {
     }
   }
 
-  return NextResponse.json({ roomId });
+    return NextResponse.json({ roomId });
+  } catch (error) {
+    console.error("Chat init error:", error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Unknown error" },
+      { status: 500 },
+    );
+  }
 }
