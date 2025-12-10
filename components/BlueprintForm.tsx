@@ -49,13 +49,12 @@ const storageKey = "webform-blueprint";
 
 export function BlueprintForm() {
   const router = useRouter();
-  const heroDefault = loadFromStorage("webform-hero-answer", "");
   const initialValues = useMemo<BlueprintFormValues>(
     () => ({
       identity: {
         businessName: "",
         oneLiner: "",
-        whatYouSell: heroDefault || "",
+        whatYouSell: "",
         brandPersonality: ["Bold"],
       },
       vision: {
