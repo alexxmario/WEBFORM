@@ -228,7 +228,7 @@ export function BlueprintForm() {
             <Field label="Business name" error={errors.identity?.businessName?.message}>
               <Input placeholder="Acme Studio" {...register("identity.businessName")} />
             </Field>
-            <Field label="One-liner" hint='e.g., "We help busy founders launch premium nutrition apps."' error={errors.identity?.oneLiner?.message}>
+            <Field label="One-liner (optional)" hint='e.g., "We help busy founders launch premium nutrition apps."' error={errors.identity?.oneLiner?.message}>
               <Input placeholder="We build fast, memorable websites." {...register("identity.oneLiner")} />
             </Field>
             <Field label="What do you sell?" error={errors.identity?.whatYouSell?.message}>
