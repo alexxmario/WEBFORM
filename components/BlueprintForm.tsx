@@ -106,6 +106,7 @@ export function BlueprintForm() {
   const [step, setStep] = useState(0);
   const [templateDialogOpen, setTemplateDialogOpen] = useState(false);
   const [customPageInput, setCustomPageInput] = useState("");
+  const [uploadingFiles, setUploadingFiles] = useState(false);
 
   const stepFields: Record<number, FieldPath<BlueprintFormValues>[]> = {
     0: [
@@ -197,6 +198,44 @@ export function BlueprintForm() {
     field.onChange([...currentPages, trimmedInput]);
     setCustomPageInput("");
     toast.success(`Added ${trimmedInput}`);
+  };
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
+    if (files.length === 0) return;
+
+    setUploadingFiles(true);
+    const currentUploads = watch("look.assetUploads") || [];
+
+    try {
+      const uploadPromises = files.map(async (file) => {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to upload ${file.name}`);
+        }
+
+        const result = await response.json();
+        return result.url;
+      });
+
+      const uploadedUrls = await Promise.all(uploadPromises);
+      setValue("look.assetUploads", [...currentUploads, ...uploadedUrls]);
+      toast.success(`Uploaded ${files.length} file${files.length > 1 ? 's' : ''}`);
+    } catch (error) {
+      console.error("Upload error:", error);
+      toast.error("Failed to upload some files");
+    } finally {
+      setUploadingFiles(false);
+      // Reset file input
+      event.target.value = "";
+    }
   };
 
   return (
@@ -417,18 +456,21 @@ export function BlueprintForm() {
                 type="file"
                 multiple
                 accept="image/*"
-                className="text-sm text-muted-foreground file:mr-3 file:rounded-full file:border file:border-border/60 file:bg-muted file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-foreground file:transition hover:file:border-primary/60"
-                onChange={(event) => {
-                  const files = Array.from(event.target.files || []).map(
-                    (file) => file.name,
-                  );
-                  setValue("look.assetUploads", files);
-                }}
+                disabled={uploadingFiles}
+                className="text-sm text-muted-foreground file:mr-3 file:rounded-full file:border file:border-border/60 file:bg-muted file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-foreground file:transition hover:file:border-primary/60 disabled:opacity-50 disabled:cursor-not-allowed"
+                onChange={handleFileUpload}
               />
               <p className="text-xs text-muted-foreground">
-                {assetUploads?.length
-                  ? `Uploaded: ${assetUploads.join(", ")}`
-                  : "JPG, PNG, SVG files supported"}
+                {uploadingFiles ? (
+                  <span className="flex items-center gap-2">
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                    Uploading files...
+                  </span>
+                ) : assetUploads?.length ? (
+                  `${assetUploads.length} file${assetUploads.length > 1 ? 's' : ''} uploaded`
+                ) : (
+                  "JPG, PNG, SVG files supported"
+                )}
               </p>
             </Field>
           </section>
