@@ -30,7 +30,7 @@ export async function POST(request: Request) {
         primary_action: data.vision.primaryAction,
         visitor_feel: data.vision.visitorFeel,
         dream_client: data.vision.dreamClient,
-        references: data.look.references,
+        "references": data.look.references,
         color_preference: data.look.colorPreference,
         imagery_vibe: data.look.imageryVibe,
         assets_note: data.look.assetsNote,

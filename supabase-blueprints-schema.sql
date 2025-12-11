@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS blueprints (
   dream_client TEXT,
 
   -- Look section (stored as JSONB for flexibility)
-  references JSONB DEFAULT '[]'::jsonb,
+  "references" JSONB DEFAULT '[]'::jsonb,
   color_preference TEXT[],
   imagery_vibe TEXT[],
   assets_note TEXT,
