@@ -91,7 +91,7 @@ export function BlueprintForm() {
         sla: false,
       },
     }),
-    [heroDefault],
+    [],
   );
 
   const defaultValues = useMemo<BlueprintFormValues>(() => {
