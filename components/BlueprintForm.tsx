@@ -300,19 +300,10 @@ export function BlueprintForm() {
                   <div className="space-y-1">
                     <p className="text-sm font-semibold text-foreground">Template library</p>
                     <p className="text-xs text-muted-foreground">
-                      Pick a starting point and we’ll add it to your references.
+                      {selectedTemplates.length
+                        ? `${selectedTemplates.length} template${selectedTemplates.length > 1 ? 's' : ''} selected`
+                        : "Pick up to 3 templates to inspire your design"}
                     </p>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedTemplates.length ? (
-                        selectedTemplates.map((template) => (
-                          <Badge key={template.id} variant="outline">
-                            {template.name}
-                          </Badge>
-                        ))
-                      ) : (
-                        <span className="text-xs text-muted-foreground">No templates selected yet.</span>
-                      )}
-                    </div>
                   </div>
                   <DialogTrigger asChild>
                     <Button variant="outline" size="sm">
