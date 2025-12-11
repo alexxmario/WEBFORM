@@ -12,7 +12,7 @@ const referenceSiteSchema = z.object({
 export const blueprintSchema = z.object({
   identity: z.object({
     businessName: z.string().min(2, "Business name is required"),
-    oneLiner: z.string().min(8, "Add a punchy one-liner"),
+    oneLiner: z.string().optional(),
     whatYouSell: z.string().min(3, "What you sell is required"),
     brandPersonality: z
       .array(z.string())
