@@ -59,13 +59,21 @@ export async function POST(request: Request) {
 
     // Send email notification
     try {
-      await fetch(`${request.url.replace('/api/blueprint', '/api/blueprint/notify')}`, {
+      const emailResponse = await fetch(`${request.url.replace('/api/blueprint', '/api/blueprint/notify')}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ blueprintId: blueprint.id, data }),
       });
+
+      const emailResult = await emailResponse.json();
+
+      if (!emailResponse.ok) {
+        console.error("Email notification failed:", emailResult);
+      } else {
+        console.log("Email sent successfully:", emailResult);
+      }
     } catch (emailError) {
-      console.error("Email notification failed:", emailError);
+      console.error("Email notification error:", emailError);
       // Don't fail the request if email fails
     }
 

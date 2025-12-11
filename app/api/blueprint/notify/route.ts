@@ -7,6 +7,10 @@ export async function POST(request: Request) {
   try {
     const { blueprintId, data } = await request.json();
 
+    console.log("Sending email notification for blueprint:", blueprintId);
+    console.log("RESEND_API_KEY configured:", !!process.env.RESEND_API_KEY);
+    console.log("NOTIFICATION_EMAIL:", process.env.NOTIFICATION_EMAIL || "alexionescu870@gmail.com");
+
     const emailHtml = `
       <!DOCTYPE html>
       <html>
