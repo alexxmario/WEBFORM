@@ -5,11 +5,8 @@ export const heroPromptSchema = z.object({
 });
 
 const referenceSiteSchema = z.object({
-  url: z.string().url("Use a valid URL"),
-  notes: z
-    .string()
-    .min(8, "Share what resonates so we can align style")
-    .max(260),
+  url: z.string(),
+  notes: z.string().optional(),
 });
 
 export const blueprintSchema = z.object({
@@ -32,7 +29,6 @@ export const blueprintSchema = z.object({
   look: z.object({
     references: z
       .array(referenceSiteSchema)
-      .max(3, "Keep it to 3 references")
       .optional()
       .default([]),
     colorPreference: z.array(z.string()).max(5, "You can add up to 5 colors"),

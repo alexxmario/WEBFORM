@@ -1,13 +1,12 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Check, Loader2, Plus } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import {
   Controller,
   FieldPath,
-  useFieldArray,
   useForm,
 } from "react-hook-form";
 import { toast } from "sonner";
@@ -16,7 +15,6 @@ import { motion } from "framer-motion";
 import { ChipGroup } from "./FormFields/ChipGroup";
 import { MultiColorPicker } from "./FormFields/MultiColorPicker";
 import { Stepper } from "./Stepper";
-import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
@@ -115,11 +113,6 @@ export function BlueprintForm() {
   const selectedTemplates = templateOptions.filter((template) =>
     references?.some((ref) => ref.url === template.url),
   );
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "look.references",
-  });
 
   const [step, setStep] = useState(0);
   const [templateDialogOpen, setTemplateDialogOpen] = useState(false);
@@ -376,54 +369,42 @@ export function BlueprintForm() {
                 </DialogContent>
               </Dialog>
             </div>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <Label>Reference sites</Label>
-                <Button
-                  type="button"
-                  size="sm"
-                  variant="ghost"
-                  onClick={() => append({ url: "", notes: "" })}
-                >
-                  <Plus className="mr-2 h-4 w-4" />
-                  Add
-                </Button>
-              </div>
+            {selectedTemplates.length > 0 && (
               <div className="space-y-3">
-                {fields.map((field, idx) => (
-                  <div
-                    key={field.id}
-                    className="rounded-2xl border border-border/60 p-4"
-                  >
-                    <div className="flex items-center justify-between">
-                      <Badge variant="ghost">Reference {idx + 1}</Badge>
-                      {fields.length > 1 && (
-                        <button
-                          type="button"
-                          className="text-xs text-muted-foreground underline"
-                          onClick={() => remove(idx)}
-                        >
-                          Remove
-                        </button>
-                      )}
-                    </div>
-                    <div className="mt-3 grid gap-3 md:grid-cols-2">
-                      <Input
-                        placeholder="https://"
-                        {...register(`look.references.${idx}.url` as const)}
+                <Label>Selected templates</Label>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {selectedTemplates.map((template) => (
+                    <div
+                      key={template.id}
+                      className="group relative overflow-hidden rounded-xl border border-border/60 bg-card shadow-sm transition hover:border-primary/50 hover:shadow-md"
+                    >
+                      <div
+                        className="aspect-square w-full bg-cover bg-center"
+                        style={{
+                          backgroundImage: template.thumbnail
+                            ? `url(${template.thumbnail})`
+                            : "radial-gradient(circle at 20% 30%,rgba(156,77,255,0.35),transparent 40%),radial-gradient(circle at 80% 30%,rgba(79,195,255,0.35),transparent 40%),linear-gradient(120deg,rgba(40,50,70,0.6),rgba(20,26,38,0.7))",
+                        }}
                       />
-                      <Input
-                        placeholder="What you like about it"
-                        {...register(`look.references.${idx}.notes` as const)}
-                      />
+                      <div className="p-3">
+                        <p className="text-sm font-semibold text-foreground">{template.name}</p>
+                        <p className="text-xs text-muted-foreground">{template.description}</p>
+                      </div>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="ghost"
+                        className="absolute right-2 top-2 h-8 w-8 rounded-full bg-background/80 p-0 backdrop-blur-sm"
+                        onClick={() => applyTemplateReference(template)}
+                        aria-label={`Remove ${template.name}`}
+                      >
+                        ×
+                      </Button>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-              {errors.look?.references?.message && (
-                <p className="text-sm text-red-400">{errors.look.references.message}</p>
-              )}
-            </div>
+            )}
             <Field label="Color preference" error={errors.look?.colorPreference?.message}>
               <Controller
                 control={control}
