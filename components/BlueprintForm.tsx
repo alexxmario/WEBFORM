@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   Controller,
   FieldPath,
@@ -107,6 +107,14 @@ export function BlueprintForm() {
   const [templateDialogOpen, setTemplateDialogOpen] = useState(false);
   const [customPageInput, setCustomPageInput] = useState("");
   const [uploadingFiles, setUploadingFiles] = useState(false);
+  const [sessionId, setSessionId] = useState<string>("");
+
+  // Generate unique session ID on mount
+  useEffect(() => {
+    const id = `session-${Date.now()}-${Math.random().toString(36).substring(2, 15)}`;
+    setSessionId(id);
+    console.log("🔑 Generated session ID:", id);
+  }, []);
 
   const stepFields: Record<number, FieldPath<BlueprintFormValues>[]> = {
     0: [
@@ -145,7 +153,7 @@ export function BlueprintForm() {
     try {
       const response = await fetch("/api/blueprint", {
         method: "POST",
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, sessionId }),
       });
       if (!response.ok) {
         console.error("❌ API error:", response.status, await response.text());
@@ -204,6 +212,11 @@ export function BlueprintForm() {
     const files = Array.from(event.target.files || []);
     if (files.length === 0) return;
 
+    if (!sessionId) {
+      toast.error("Session not initialized. Please refresh the page.");
+      return;
+    }
+
     setUploadingFiles(true);
     const currentUploads = watch("look.assetUploads") || [];
 
@@ -211,6 +224,7 @@ export function BlueprintForm() {
       const uploadPromises = files.map(async (file) => {
         const formData = new FormData();
         formData.append("file", file);
+        formData.append("sessionId", sessionId);
 
         const response = await fetch("/api/upload", {
           method: "POST",

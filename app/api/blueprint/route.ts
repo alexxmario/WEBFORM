@@ -6,7 +6,8 @@ import { supabaseServerAdmin } from "@/lib/supabase/server";
 export async function POST(request: Request) {
   try {
     const payload = await request.json();
-    const parse = blueprintSchema.safeParse(payload);
+    const { sessionId, ...formData } = payload;
+    const parse = blueprintSchema.safeParse(formData);
 
     if (!parse.success) {
       return NextResponse.json(
@@ -53,6 +54,41 @@ export async function POST(request: Request) {
         { ok: false, message: "Failed to save blueprint" },
         { status: 500 },
       );
+    }
+
+    // Organize assets into blueprint folder if there are uploads and sessionId
+    if (sessionId && data.look.assetUploads && data.look.assetUploads.length > 0) {
+      try {
+        const organizeUrl = request.url.replace('/api/blueprint', '/api/blueprint/organize-assets');
+        const organizeResponse = await fetch(organizeUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            sessionId,
+            blueprintId: blueprint.id,
+            assetUrls: data.look.assetUploads,
+          }),
+        });
+
+        if (organizeResponse.ok) {
+          const { updatedUrls } = await organizeResponse.json();
+
+          // Update blueprint with new URLs
+          if (updatedUrls && updatedUrls.length > 0) {
+            await supabase
+              .from("blueprints")
+              .update({ asset_uploads: updatedUrls })
+              .eq("id", blueprint.id);
+
+            console.log("Assets organized successfully for blueprint:", blueprint.id);
+          }
+        } else {
+          console.error("Failed to organize assets:", await organizeResponse.text());
+        }
+      } catch (organizeError) {
+        console.error("Asset organization error:", organizeError);
+        // Don't fail the request if asset organization fails
+      }
     }
 
     // Send email notification

@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
   try {
     const { blueprintId, data } = await request.json();
@@ -10,6 +8,17 @@ export async function POST(request: Request) {
     console.log("Sending email notification for blueprint:", blueprintId);
     console.log("RESEND_API_KEY configured:", !!process.env.RESEND_API_KEY);
     console.log("NOTIFICATION_EMAIL:", process.env.NOTIFICATION_EMAIL || "alexionescu870@gmail.com");
+
+    // Check if Resend API key is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.warn("RESEND_API_KEY not configured, skipping email notification");
+      return NextResponse.json({
+        ok: true,
+        message: "Email notification skipped (API key not configured)"
+      });
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const emailHtml = `
       <!DOCTYPE html>

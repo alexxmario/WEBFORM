@@ -5,6 +5,7 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData();
     const file = formData.get("file") as File;
+    const sessionId = formData.get("sessionId") as string;
 
     if (!file) {
       return NextResponse.json(
@@ -13,19 +14,26 @@ export async function POST(request: Request) {
       );
     }
 
+    if (!sessionId) {
+      return NextResponse.json(
+        { ok: false, error: "No session ID provided" },
+        { status: 400 }
+      );
+    }
+
     // Convert file to buffer
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Generate unique filename
+    // Generate unique filename with session folder
     const timestamp = Date.now();
     const randomStr = Math.random().toString(36).substring(2, 15);
     const extension = file.name.split(".").pop();
-    const filename = `${timestamp}-${randomStr}.${extension}`;
+    const filename = `${sessionId}/${timestamp}-${randomStr}.${extension}`;
 
     const supabase = supabaseServerAdmin();
 
-    // Upload to Supabase Storage
+    // Upload to Supabase Storage in session-specific folder
     const { error } = await supabase.storage
       .from("blueprint-assets")
       .upload(filename, buffer, {
